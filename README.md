@@ -1,4 +1,6 @@
-# MediTriage — a timed, budget-limited diagnostic game
+# DocSim — a timed, budget-limited diagnostic game
+
+**by Ahamed Shahmy** · [maa.shahmy@gmail.com](mailto:maa.shahmy@gmail.com)
 
 A patient is wheeled into your resuscitation room. You get **ten minutes**, a **fixed budget** and
 whatever clinical skill you can bring. The clock never stops, the monitor trends downward until you

@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — case library (part 1 of 2)
+   DocSim — case library (part 1 of 2)
    Each case is a plain object. See README.md for the field reference.
    Add your own cases here or in cases-more.js; the engine never needs editing.
    ========================================================================= */

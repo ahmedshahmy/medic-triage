@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — full playthrough test
+   DocSim — full playthrough test
    Plays all eight cases the way a good clinician would (resuscitate, order the
    high-yield tests, commit to the diagnosis, give the whole correct bundle)
    and requires every one of them to end in a full recovery.
@@ -41,24 +41,24 @@ try {
     'grade'.padEnd(24) + 'tests  spent/budget   stability');
 
   for (const id of ids) {
-    await cdp.eval(`MediTriage.start(${JSON.stringify(id)})`);
+    await cdp.eval(`DocSim.start(${JSON.stringify(id)})`);
     await sleep(120);
     await cdp.eval(`document.querySelector('#gate-begin').click()`);
     await sleep(150);
 
     // 1. resuscitate with every helpful bedside measure (skip harmful ones)
     await cdp.eval(`(() => {
-      const st = MediTriage.state;
+      const st = DocSim.state;
       for (const a of st.cs.actions) {
         if (a.harm) continue;
         const b = document.querySelector('button[data-doact="' + a.id + '"]');
         if (b && !b.disabled) b.click();
       }
-      return Object.keys(MediTriage.state.actions).length; })()`);
+      return Object.keys(DocSim.state.actions).length; })()`);
 
     // 2. order the fastest high-yield investigations the budget allows
     await cdp.eval(`(() => {
-      const st = MediTriage.state;
+      const st = DocSim.state;
       const crit = st.cs.tests.filter(t => t.flag === 'critical').sort((a, b) => a.tat - b.tat);
       for (const t of crit.slice(0, 3)) {
         const b = document.querySelector('button[data-ordertest="' + t.id + '"]');
@@ -67,23 +67,23 @@ try {
       return true; })()`);
 
     // 3. wait for the first report the way a real clinician would read results
-    await waitFor(`Object.values(MediTriage.state.tests).some(t => t.status === 'done')`, 15000);
-    const readResults = await cdp.eval(`Object.values(MediTriage.state.tests).filter(t => t.status === 'done').length`);
+    await waitFor(`Object.values(DocSim.state.tests).some(t => t.status === 'done')`, 15000);
+    const readResults = await cdp.eval(`Object.values(DocSim.state.tests).filter(t => t.status === 'done').length`);
 
     // 4. commit to the diagnosis (typed, not clicked)
     await cdp.eval(`document.querySelector('#tabs [data-tab="dx"]').click();
       document.querySelector('#dx-input').value = ${JSON.stringify('')} ;
       true`);
-    const label = await cdp.eval(`MediTriage.state.cs.dx.label`);
+    const label = await cdp.eval(`DocSim.state.cs.dx.label`);
     await cdp.eval(`document.querySelector('#dx-input').value = ${JSON.stringify(label)};
       document.querySelector('#dx-form').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
       true`);
     await sleep(150);
-    const dxOk = await cdp.eval(`MediTriage.state.dxSolved`);
+    const dxOk = await cdp.eval(`DocSim.state.dxSolved`);
 
     // 5. give the complete correct management bundle (and nothing harmful)
     await cdp.eval(`(() => {
-      const st = MediTriage.state;
+      const st = DocSim.state;
       for (const o of st.cs.mgmt.options) {
         if (!o.correct) continue;
         const box = document.querySelector('[data-rxbox="' + o.id + '"]');
@@ -96,14 +96,14 @@ try {
     // 6. let the patient recover
     const ended = await waitFor(`document.querySelector('.screen.is-active').id === 'screen-end'`, 20000, 150);
     const res = JSON.parse(await cdp.eval(`JSON.stringify({
-      outcome: MediTriage.state && MediTriage.state.outcome,
+      outcome: DocSim.state && DocSim.state.outcome,
       win: document.querySelector('#outcome').classList.contains('win'),
       total: Number(document.querySelector('#score-total').textContent),
       rank: document.querySelector('#rank-line').textContent.replace(/\\s+/g,' ').trim().slice(0, 22),
-      ordered: Object.keys(MediTriage.state.tests).length,
-      spent: MediTriage.state.spent, budget: MediTriage.state.cs.budget,
-      stability: Math.round(MediTriage.state.stability),
-      grade: MediTriage.state.mgmtGrade })`));
+      ordered: Object.keys(DocSim.state.tests).length,
+      spent: DocSim.state.spent, budget: DocSim.state.cs.budget,
+      stability: Math.round(DocSim.state.stability),
+      grade: DocSim.state.mgmtGrade })`));
 
     console.log('  ' + id.padEnd(14) + String(res.outcome).padEnd(12) + String(res.total).padEnd(8) +
       res.rank.padEnd(24) + String(res.ordered).padEnd(7) +

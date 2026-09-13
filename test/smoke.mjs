@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — headless smoke test
+   DocSim — headless smoke test
    Drives the real app in headless Chrome over CDP: validates every case file,
    plays a full winning run, and checks the death / timeout / budget paths.
 
@@ -26,8 +26,8 @@ try {
 
   /* ---------------------------- 1. boot ---------------------------- */
   console.log('\n1. Boot and case files');
-  const ready = await cdp.eval('!!(window.MediTriage && window.CASES && window.CASES.length)');
-  check('app boots and exposes MediTriage', ready === true);
+  const ready = await cdp.eval('!!(window.DocSim && window.CASES && window.CASES.length)');
+  check('app boots and exposes DocSim', ready === true);
   const n = await cdp.eval('window.CASES.length');
   check(`case library loaded (expect ${EXPECTED_CASES})`, n === EXPECTED_CASES, 'got ' + n);
 
@@ -68,13 +68,13 @@ try {
   const matcher = await cdp.eval(`(() => {
     const out = [];
     for (const c of window.CASES) {
-      const labelOk = window.MediTriage.matchFor(c.dx, c.dx.label).ok;
-      const accepted = c.differentials.filter(d => window.MediTriage.matchFor(c.dx, d).ok);
+      const labelOk = window.DocSim.matchFor(c.dx, c.dx.label).ok;
+      const accepted = c.differentials.filter(d => window.DocSim.matchFor(c.dx, d).ok);
       const rejectedDistractors = c.differentials.length - accepted.length;
       out.push({ id: c.id, labelOk, accepted, rejectedDistractors,
         total: c.differentials.length,
-        typo: window.MediTriage.matchFor(c.dx, c.dx.accept[0].replace(/tion/, 'shun')).ok,
-        nonsense: window.MediTriage.matchFor(c.dx, 'a bad case of the vapours').ok });
+        typo: window.DocSim.matchFor(c.dx, c.dx.accept[0].replace(/tion/, 'shun')).ok,
+        nonsense: window.DocSim.matchFor(c.dx, 'a bad case of the vapours').ok });
     }
     return JSON.stringify(out); })()`);
   const mrows = JSON.parse(matcher);
@@ -93,11 +93,32 @@ try {
     active: document.querySelector('.screen.is-active')?.id,
     cases: document.querySelectorAll('#case-list .case-item').length,
     stats: document.querySelectorAll('#career-stats .stat').length,
-    title: document.title })`);
+    title: document.title,
+    heading: document.querySelector('.logo h1').textContent.trim(),
+    byline: document.querySelector('.byline').textContent.replace(/\\s+/g, ' ').trim(),
+    footer: document.querySelector('.home-foot').textContent.replace(/\\s+/g, ' ').trim(),
+    mailto: document.querySelector('.byline a').getAttribute('href'),
+    bylineBox: (() => {
+      const el = document.querySelector('.byline');
+      const b = el.getBoundingClientRect();
+      const tag = document.querySelector('.tagline').getBoundingClientRect();
+      return { w: Math.round(b.width), h: Math.round(b.height),
+        below: b.top >= tag.bottom - 1, size: parseFloat(getComputedStyle(el).fontSize) };
+    })() })`);
   const h = JSON.parse(home);
   check('start screen is active', h.active === 'screen-start', h.active);
   check('all cases listed', h.cases === EXPECTED_CASES, 'got ' + h.cases);
   check('career panel rendered', h.stats === 4, 'got ' + h.stats);
+  check('the app is titled DocSim', h.title.startsWith('DocSim') && h.heading === 'DocSim',
+    `${h.title} / ${h.heading}`);
+  check('the author credit sits next to the title',
+    /Ahamed Shahmy/.test(h.byline) && /maa\.shahmy@gmail\.com/.test(h.byline),
+    h.byline);
+  check('the credit links to the author email', h.mailto === 'mailto:maa.shahmy@gmail.com', h.mailto);
+  check('the credit is legible and sits directly under the title',
+    h.bylineBox.w > 120 && h.bylineBox.h >= 14 && h.bylineBox.size >= 12 && h.bylineBox.below === true,
+    JSON.stringify(h.bylineBox));
+  check('the footer repeats the credit', /Ahamed Shahmy/.test(h.footer), h.footer);
   await shot('01-home.png');
 
   /* ------------------------- 3. start a case ------------------------ */
@@ -133,7 +154,7 @@ try {
   await cdp.eval(`document.querySelector('#gate-begin').click()`);
   await sleep(400);
   const started = await cdp.eval(`!document.querySelector('#gate').hidden === false &&
-    MediTriage.state && MediTriage.state.running`);
+    DocSim.state && DocSim.state.running`);
   check('clock is running after Begin', started === true);
 
   /* ------------------- 4. resuscitation + lab queue ----------------- */
@@ -142,8 +163,8 @@ try {
   await cdp.eval(`document.querySelector('[data-doact="cathlab"]').click()`);
   await cdp.eval(`document.querySelector('[data-doact="oxygen"]').click()`);
   await sleep(150);
-  const afterActions = await cdp.eval(`JSON.stringify({ spent: MediTriage.state.spent,
-    mul: MediTriage.state.decayMul, done: Object.keys(MediTriage.state.actions).length })`);
+  const afterActions = await cdp.eval(`JSON.stringify({ spent: DocSim.state.spent,
+    mul: DocSim.state.decayMul, done: Object.keys(DocSim.state.actions).length })`);
   const aa = JSON.parse(afterActions);
   check('three bedside actions recorded', aa.done === 3, 'got ' + aa.done);
   check('actions charged to the budget', aa.spent === 20, 'spent ' + aa.spent);
@@ -154,8 +175,8 @@ try {
   await cdp.eval(`document.querySelector('[data-ordertest="cxr"]').click()`);
   await cdp.eval(`document.querySelector('[data-ordertest="cta"]').click()`);
   await sleep(150);
-  const queued = await cdp.eval(`JSON.stringify({ pending: MediTriage.state.pending.length,
-    spend: MediTriage.state.spent, blockMsg: !!document.querySelector('.status.blocked') })`);
+  const queued = await cdp.eval(`JSON.stringify({ pending: DocSim.state.pending.length,
+    spend: DocSim.state.spent, blockMsg: !!document.querySelector('.status.blocked') })`);
   const q = JSON.parse(queued);
   check('four tests running at once', q.pending === 4, 'got ' + q.pending);
   check('test costs charged', q.spend === 790, 'spent ' + q.spend);
@@ -166,9 +187,9 @@ try {
 
   await sleep(9500);
   const ecg = await cdp.eval(`JSON.stringify({
-    done: MediTriage.state.tests.ecg?.status,
+    done: DocSim.state.tests.ecg?.status,
     shown: (document.querySelector('[data-test="ecg"] .entry-result')||{}).textContent?.slice(0,40),
-    mul: MediTriage.state.decayMul, pending: MediTriage.state.pending.length })`);
+    mul: DocSim.state.decayMul, pending: DocSim.state.pending.length })`);
   const e = JSON.parse(ecg);
   check('ECG reported after its turnaround', e.done === 'done', e.done);
   check('ECG result text displayed', /ST elevation/.test(e.shown || ''), e.shown);
@@ -181,11 +202,11 @@ try {
 
   /* -------------------------- 5. the clock -------------------------- */
   console.log('\n5. The clock and the deteriorating patient');
-  const before = await cdp.eval('MediTriage.state.elapsed');
+  const before = await cdp.eval('DocSim.state.elapsed');
   await sleep(1200);
-  const after = await cdp.eval('MediTriage.state.elapsed');
+  const after = await cdp.eval('DocSim.state.elapsed');
   check('clock advances in real time', after > before, `${before} -> ${after}`);
-  const lifeNow = await cdp.eval('MediTriage.state.stability');
+  const lifeNow = await cdp.eval('DocSim.state.stability');
   check('patient stability falls while untreated', lifeNow < 100, 'stability ' + lifeNow);
   const chartPts = await cdp.eval('document.querySelectorAll("#chart path").length');
   check('monitor chart is drawing the trend', chartPts >= 3, 'paths ' + chartPts);
@@ -197,8 +218,8 @@ try {
   await cdp.eval(`document.querySelector('#dx-input').value = 'pneumothorax';
     document.querySelector('#dx-form').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}))`);
   await sleep(200);
-  const wrong = await cdp.eval(`JSON.stringify({ wrong: MediTriage.state.dxWrong,
-    solved: MediTriage.state.dxSolved, msgs: document.querySelectorAll('#dx-attempts .verdict-bad').length })`);
+  const wrong = await cdp.eval(`JSON.stringify({ wrong: DocSim.state.dxWrong,
+    solved: DocSim.state.dxSolved, msgs: document.querySelectorAll('#dx-attempts .verdict-bad').length })`);
   const w = JSON.parse(wrong);
   check('wrong diagnosis is rejected with an explanation', w.wrong === 1 && w.solved === false, wrong);
   check('wrong diagnosis shown in the attempt history', w.msgs === 1, 'got ' + w.msgs);
@@ -211,7 +232,7 @@ try {
     document.querySelector('#dx-input').value = 'she has an acute anterior STEMI';
     document.querySelector('#dx-form').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}))`);
   await sleep(300);
-  const right = await cdp.eval(`JSON.stringify({ solved: MediTriage.state.dxSolved,
+  const right = await cdp.eval(`JSON.stringify({ solved: DocSim.state.dxSolved,
     confirmed: !document.querySelector('#dx-confirmed').hidden,
     tab: document.querySelector('.pane[data-pane="rx"]').hidden === false,
     options: document.querySelectorAll('#rx-list .stack-check').length })`);
@@ -232,15 +253,15 @@ try {
       box.checked = true;
       box.dispatchEvent(new Event('change', { bubbles: true }));
     }
-    return Object.keys(MediTriage.state ? {} : {}); })()`);
+    return Object.keys(DocSim.state ? {} : {}); })()`);
   await sleep(200);
   const picked = await cdp.eval(`document.querySelectorAll('#rx-list input:checked').length`);
   check('correct bundle selected (8 of 12)', picked === 8, 'got ' + picked);
 
   await cdp.eval(`document.querySelector('#btn-rx').click()`);
   await sleep(400);
-  const rx = await cdp.eval(`JSON.stringify({ grade: MediTriage.state.mgmtGrade,
-    recovering: MediTriage.state.recovering,
+  const rx = await cdp.eval(`JSON.stringify({ grade: DocSim.state.mgmtGrade,
+    recovering: DocSim.state.recovering,
     feedback: document.querySelectorAll('#rx-feedback .entry').length })`);
   const rxr = JSON.parse(rx);
   check('full correct management graded 1.0', rxr.grade === 1, 'grade ' + rxr.grade);
@@ -268,11 +289,13 @@ try {
   check('grade line present', /Grade:/.test(en.rank), en.rank);
   check('score breakdown itemised', en.rows >= 8, 'rows ' + en.rows);
   check('debrief populated', en.debrief >= 8, 'pearls ' + en.debrief);
-  check('share text mentions MediTriage and the score', /MediTriage/.test(en.share) && /1520/.test(en.share), en.share.slice(0, 80));
+  check('share text carries the app name, the score and the author credit',
+    /DocSim/.test(en.share) && /1520/.test(en.share) && /Ahamed Shahmy/.test(en.share),
+    en.share.slice(0, 90));
   check('scorecard image drawn on canvas', en.card > 5000, 'dataURL length ' + en.card);
   await shot('05-results.png');
 
-  const persisted = await cdp.eval(`(() => { try { return localStorage.getItem('meditriage.stats.v1'); }
+  const persisted = await cdp.eval(`(() => { try { return localStorage.getItem('docsim.stats.v1'); }
     catch (e) { return 'unavailable'; } })()`);
   const ps = persisted && persisted !== 'unavailable' ? JSON.parse(persisted) : null;
   check('record survives the case (persistent when storage is available)',
@@ -284,43 +307,43 @@ try {
   console.log('\n8. Failure paths');
   await cdp.eval(`document.querySelector('#btn-home').click()`);
   await sleep(200);
-  await cdp.eval(`MediTriage.start('dka')`);
+  await cdp.eval(`DocSim.start('dka')`);
   await sleep(200);
   await cdp.eval(`document.querySelector('#gate-begin').click()`);
   await sleep(200);
   const blocked = await cdp.eval(`(() => {
     document.querySelector('#tabs [data-tab="tests"]').click();
     const btn = document.querySelector('button[data-ordertest="cthead"]');
-    MediTriage.state.spent = MediTriage.state.cs.budget - 10;
+    DocSim.state.spent = DocSim.state.cs.budget - 10;
     document.querySelector('#tabs [data-tab="patient"]').click();
     document.querySelector('#tabs [data-tab="tests"]').click();
     const btn2 = document.querySelector('button[data-ordertest="cthead"]');
-    const before = MediTriage.state.spent;
+    const before = DocSim.state.spent;
     if (btn2 && !btn2.disabled) btn2.click();
-    return JSON.stringify({ disabled: btn2 ? btn2.disabled : null, overspent: MediTriage.state.spent > before,
+    return JSON.stringify({ disabled: btn2 ? btn2.disabled : null, overspent: DocSim.state.spent > before,
       blockedBadge: !!document.querySelector('[data-test="cthead"] .status.blocked') }); })()`);
   const bl = JSON.parse(blocked);
   check('test blocked when the budget cannot cover it', bl.disabled === true, blocked);
   check('budget cannot be exceeded', bl.overspent === false);
   check('blocked test is labelled as unaffordable', bl.blockedBadge === true);
 
-  await cdp.eval(`MediTriage.state.stability = 0.02`);
+  await cdp.eval(`DocSim.state.stability = 0.02`);
   await sleep(1400);
   const dead = await cdp.eval(`JSON.stringify({ screen: document.querySelector('.screen.is-active').id,
-    outcome: MediTriage.state.outcome, lose: document.querySelector('#outcome').classList.contains('lose'),
+    outcome: DocSim.state.outcome, lose: document.querySelector('#outcome').classList.contains('lose'),
     title: document.querySelector('#outcome h1').textContent })`);
   const dd = JSON.parse(dead);
   check('death ends the case', dd.outcome === 'died', dd.outcome);
   check('death shows the failure banner', dd.lose === true, dd.title);
   await shot('06-death.png');
 
-  await cdp.eval(`MediTriage.start('op')`);
+  await cdp.eval(`DocSim.start('op')`);
   await sleep(200);
   await cdp.eval(`document.querySelector('#gate-begin').click()`);
   await sleep(200);
-  await cdp.eval(`MediTriage.state.elapsed = MediTriage.state.cs.timeLimitSec - 0.3`);
+  await cdp.eval(`DocSim.state.elapsed = DocSim.state.cs.timeLimitSec - 0.3`);
   await sleep(900);
-  const to = await cdp.eval(`JSON.stringify({ outcome: MediTriage.state.outcome,
+  const to = await cdp.eval(`JSON.stringify({ outcome: DocSim.state.outcome,
     title: document.querySelector('#outcome h1').textContent })`);
   const tt = JSON.parse(to);
   check('running out of time ends the case as a failure', tt.outcome === 'timeout', to);
@@ -329,15 +352,15 @@ try {
   console.log('\n9. Support features and console hygiene');
   await cdp.eval(`document.querySelector('#btn-home').click()`);
   await sleep(150);
-  await cdp.eval(`MediTriage.start('meningitis')`);
+  await cdp.eval(`DocSim.start('meningitis')`);
   await sleep(150);
   await cdp.eval(`document.querySelector('#gate-begin').click()`);
   await sleep(150);
-  const t0 = await cdp.eval('MediTriage.state.remaining');
+  const t0 = await cdp.eval('DocSim.state.remaining');
   await cdp.eval(`document.querySelector('#btn-hint').click()`);
   await sleep(150);
-  const hint = await cdp.eval(`JSON.stringify({ used: MediTriage.state.hints,
-    remaining: MediTriage.state.remaining, badge: document.querySelector('#hint-count').textContent,
+  const hint = await cdp.eval(`JSON.stringify({ used: DocSim.state.hints,
+    remaining: DocSim.state.remaining, badge: document.querySelector('#hint-count').textContent,
     shown: document.querySelectorAll('.hintline').length })`);
   const hh = JSON.parse(hint);
   check('hint reveals a clue', hh.used === 1 && hh.shown === 1, hint);
@@ -394,7 +417,7 @@ try {
   check('six vitals tiles rendered', lay.vitalsCount === 6, 'got ' + lay.vitalsCount);
 
   const colour = await cdp.eval(`(() => {
-    MediTriage.state.stability = 20;
+    DocSim.state.stability = 20;
     return new Promise(r => setTimeout(() => r(JSON.stringify({
       pulse: document.querySelectorAll('#vitals-grid .v-crit').length,
       alarm: !document.querySelector('#alarm').hidden,
@@ -421,9 +444,9 @@ try {
   await cdp.send('Page.reload', { ignoreCache: true });
   await sleep(1400);
   const desk = await cdp.eval(`(() => {
-    const ready = !!(window.MediTriage && window.CASES);
+    const ready = !!(window.DocSim && window.CASES);
     if (!ready) return JSON.stringify({ ready: false });
-    MediTriage.start('pe');
+    DocSim.start('pe');
     document.querySelector('#tabs [data-tab="tests"]').click();
     const grid = getComputedStyle(document.querySelector('.play-grid'));
     const patient = document.querySelector('.pane[data-pane="patient"]').getBoundingClientRect();

@@ -2,7 +2,7 @@
   "name": "medic-triage",
   "version": "1.0.0",
   "private": true,
-  "description": "MediTriage — a ten-minute, budget-limited medical diagnostic game. Zero dependencies, no build step.",
+  "description": "DocSim — a ten-minute, budget-limited medical diagnostic game. Zero dependencies, no build step.",
   "scripts": {
     "start": "python3 -m http.server 8000",
     "test": "node test/cases.mjs && node test/smoke.mjs && node test/playthrough.mjs",

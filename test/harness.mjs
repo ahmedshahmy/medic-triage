@@ -1,5 +1,5 @@
 /* =========================================================================
-   Shared headless-Chrome harness for the MediTriage tests.
+   Shared headless-Chrome harness for the DocSim tests.
    Launches Chrome, connects over CDP and exposes tiny helpers.
    ========================================================================= */
 import { spawn } from 'node:child_process';
@@ -93,7 +93,7 @@ export async function launch({ url, width = 390, height = 844, mobile = true, sp
   for (let i = 0; i < 120; i++) {
     try {
       const ready = await cdp.eval(
-        'document.readyState === "complete" && !!(window.MediTriage && window.CASES && window.CASES.length)');
+        'document.readyState === "complete" && !!(window.DocSim && window.CASES && window.CASES.length)');
       if (ready) break;
     } catch { /* page may still be loading */ }
     await sleep(250);

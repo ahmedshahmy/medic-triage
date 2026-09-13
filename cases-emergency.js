@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — case library (part 3): acute emergencies
+   DocSim — case library (part 3): acute emergencies
    Loaded after cases-more.js. Same schema; just push onto window.CASES.
    ========================================================================= */
 window.CASES = window.CASES || [];

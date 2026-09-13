@@ -1,7 +1,8 @@
 {
-  "name": "MediTriage — Timed Diagnostic Challenge",
-  "short_name": "MediTriage",
-  "description": "A ten-minute, budget-limited medical diagnostic game: read the case, order investigations, diagnose and treat before the patient deteriorates.",
+  "name": "DocSim — Timed Diagnostic Challenge",
+  "short_name": "DocSim",
+  "author": "Ahamed Shahmy (maa.shahmy@gmail.com)",
+  "description": "DocSim by Ahamed Shahmy. A ten-minute, budget-limited medical diagnostic game: read the case, order investigations, diagnose and treat before the patient deteriorates.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

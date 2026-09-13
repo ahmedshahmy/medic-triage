@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — case library (part 5): complex medical emergencies
+   DocSim — case library (part 5): complex medical emergencies
    Loaded after cases-medicine.js. Same schema; just push onto window.CASES.
    ========================================================================= */
 window.CASES = window.CASES || [];

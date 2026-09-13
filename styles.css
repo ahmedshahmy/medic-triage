@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — styles
+   DocSim — styles
    Mobile-first. Dark clinical monitor theme. No frameworks, no build step.
    ========================================================================= */
 
@@ -102,6 +102,11 @@ b,strong{color:#fff}
   border-radius:16px;background:linear-gradient(160deg,#123245,#0b1a24);border:1px solid var(--line-2);color:var(--teal);
 }
 .tagline{color:var(--teal);font:600 .9rem var(--mono);margin:0}
+.byline{color:var(--txt-3);font-size:.8rem;margin:.15rem 0 0}
+.byline a{color:var(--txt-2);text-decoration:none;border-bottom:1px dotted var(--line-2)}
+.byline a:hover{color:var(--teal)}
+.home-foot a{color:var(--txt-2);text-decoration:none;border-bottom:1px dotted var(--line-2)}
+.home-foot a:hover{color:var(--teal)}
 .lede{color:var(--txt-2);max-width:62ch;font-size:.95rem}
 .disclaimer{
   border-left:3px solid var(--amber);background:rgba(255,176,32,.08);

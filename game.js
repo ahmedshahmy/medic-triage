@@ -1,5 +1,5 @@
 /* =========================================================================
-   MediTriage — game engine
+   DocSim — game engine
    Real-time case clock, physiological deterioration model, lab queue,
    diagnosis matching, management grading, scoring and social sharing.
    ========================================================================= */
@@ -58,14 +58,16 @@
   /* ===================================================================== */
   /*  PERSISTENCE                                                          */
   /* ===================================================================== */
-  const LS_STATS = 'meditriage.stats.v1';
-  const LS_OPTS = 'meditriage.opts.v1';
+  const LS_STATS = 'docsim.stats.v1';
+  const LS_OPTS = 'docsim.opts.v1';
+  const LS_LEGACY = ['meditriage.stats.v1', 'meditriage.opts.v1'];   // pre-rename keys
 
   function loadStore() {
     try {
-      const s = JSON.parse(localStorage.getItem(LS_STATS) || 'null');
+      const read = (key, legacy) => localStorage.getItem(key) || localStorage.getItem(legacy);
+      const s = JSON.parse(read(LS_STATS, LS_LEGACY[0]) || 'null');
       if (s && typeof s === 'object') stats = Object.assign(stats, s);
-      const o = JSON.parse(localStorage.getItem(LS_OPTS) || 'null');
+      const o = JSON.parse(read(LS_OPTS, LS_LEGACY[1]) || 'null');
       if (o && typeof o === 'object') opts = Object.assign(opts, o);
     } catch (e) { /* first run or storage blocked — defaults are fine */ }
   }
@@ -1022,7 +1024,7 @@
     const who = opts.name ? opts.name + ' scored ' : 'I scored ';
     const url = location.protocol.indexOf('http') === 0 ? location.href : '';
     return [
-      'MediTriage \u2014 timed diagnostic challenge',
+      'DocSim \u2014 timed diagnostic challenge, by Ahamed Shahmy',
       who + sc.total + '/' + MAX_SCORE + ' as ' + rank + '.',
       outcomeLine,
       'Case: ' + cs.title + ' (' + cs.difficulty + ')',
@@ -1030,7 +1032,7 @@
       'Time used ' + mmss(S.elapsed) + '/' + mmss(cs.timeLimitSec) +
         ' \u00B7 budget left ' + money(cs.budget - S.spent) +
         ' \u00B7 ' + sc.ordered + ' investigations \u00B7 stability ' + pct(S.stability),
-      '#MediTriage #MedEd #ClinicalReasoning',
+      '#DocSim #MedEd #ClinicalReasoning',
       url
     ].filter(Boolean).join('\n');
   }
@@ -1065,11 +1067,14 @@
 
     ctx.textAlign = 'left';
     ctx.fillStyle = '#2ee6c5';
-    ctx.font = '700 40px system-ui, sans-serif';
-    ctx.fillText('MediTriage', 64, 118);
+    ctx.font = '700 46px system-ui, sans-serif';
+    ctx.fillText('DocSim', 64, 118);
     ctx.fillStyle = '#6d8394';
     ctx.font = '600 26px ui-monospace, monospace';
     ctx.fillText('TIMED DIAGNOSTIC CHALLENGE', 64, 158);
+    ctx.fillStyle = '#4f6a7d';
+    ctx.font = '600 22px system-ui, sans-serif';
+    ctx.fillText('by Ahamed Shahmy \u00B7 maa.shahmy@gmail.com', 64, 192);
 
     ctx.fillStyle = '#e8f1f6';
     ctx.font = '700 46px system-ui, sans-serif';
@@ -1166,7 +1171,7 @@
         if (!b) { toast('Could not build the image.', 'bad'); return; }
         const a = document.createElement('a');
         a.href = URL.createObjectURL(b);
-        a.download = 'meditriage-scorecard.png';
+        a.download = 'docsim-scorecard.png';
         a.click();
         setTimeout(() => URL.revokeObjectURL(a.href), 4000);
         toast('Scorecard downloaded — attach it to your post.', 'good');
@@ -1178,11 +1183,11 @@
         sharecardBlob((b) => {
           let files = null;
           try {
-            if (b && window.File) files = [new File([b], 'meditriage-scorecard.png', { type: 'image/png' })];
+            if (b && window.File) files = [new File([b], 'docsim-scorecard.png', { type: 'image/png' })];
           } catch (e) { files = null; }
           const payload = (files && navigator.canShare && navigator.canShare({ files }))
-            ? { text, files, title: 'MediTriage scorecard' }
-            : { text, title: 'MediTriage scorecard' };
+            ? { text, files, title: 'DocSim scorecard by Ahamed Shahmy' }
+            : { text, title: 'DocSim scorecard by Ahamed Shahmy' };
           navigator.share(payload).catch((err) => {
             if (!err || err.name !== 'AbortError') {
               toast('Sharing was blocked — copying the text instead.', 'warn');
@@ -1381,7 +1386,7 @@
   else boot();
 
   /* expose a little for debugging in the console */
-  window.MediTriage = {
+  window.DocSim = {
     get state() { return S; },
     cases: () => window.CASES,
     start: startCase,
