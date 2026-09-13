@@ -1,0 +1,20 @@
+{
+  "name": "MediTriage — Timed Diagnostic Challenge",
+  "short_name": "MediTriage",
+  "description": "A ten-minute, budget-limited medical diagnostic game: read the case, order investigations, diagnose and treat before the patient deteriorates.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#080d14",
+  "theme_color": "#0a1018",
+  "categories": ["education", "medical", "games"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

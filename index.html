@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1018">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="MediTriage - a timed, budget-limited medical diagnostic challenge. Read the history, order investigations, make the diagnosis, save the patient.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>MediTriage &middot; Timed Diagnostic Challenge</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<!-- the manifest is attached by game.js only when served over http(s):
+     browsers refuse to fetch it from a file:// page -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================ START / HOME SCREEN ============================ -->
+<section id="screen-start" class="screen is-active">
+  <div class="home-wrap">
+    <header class="home-head">
+      <div class="logo">
+        <span class="logo-mark" aria-hidden="true">&#9877;</span>
+        <div>
+          <h1>MediTriage</h1>
+          <p class="tagline">Ten minutes. One budget. One patient.</p>
+        </div>
+      </div>
+      <p class="lede">
+        A deteriorating patient is wheeled in. The clock starts and does not stop.
+        Order only the investigations you can afford, work out the diagnosis and type it in,
+        then get the management right before the patient arrests or the money runs out.
+      </p>
+      <div class="disclaimer" role="note">
+        <strong>Educational simulation only.</strong> Cases, drug doses and pathways are simplified
+        for teaching. Never use this for real clinical decisions.
+      </div>
+    </header>
+
+    <div class="home-grid">
+      <section class="card" aria-labelledby="cases-h">
+        <div class="card-head">
+          <h2 id="cases-h">Choose a case</h2>
+          <button id="btn-random" class="btn btn-ghost btn-sm" type="button">Random case</button>
+        </div>
+        <div class="filters" role="group" aria-label="Filter cases by difficulty">
+          <button class="chip is-on" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="easy" type="button">Easy</button>
+          <button class="chip" data-filter="moderate" type="button">Moderate</button>
+          <button class="chip" data-filter="hard" type="button">Hard</button>
+        </div>
+        <ul id="case-list" class="case-list"><!-- filled by game.js --></ul>
+      </section>
+
+      <aside class="home-side">
+        <section class="card">
+          <h2>Your record</h2>
+          <div id="career-stats" class="stats"><!-- filled by game.js --></div>
+          <button id="btn-reset-stats" class="btn btn-ghost btn-sm" type="button">Reset record</button>
+        </section>
+
+        <section class="card">
+          <h2>How to play</h2>
+          <ol class="howto">
+            <li><b>Read the case.</b> History and examination are free, and the monitor tells you how sick the patient is.</li>
+            <li><b>Act fast.</b> Resuscitation and bedside measures are cheap or free and slow the deterioration.</li>
+            <li><b>Spend wisely.</b> Every test costs money and time (turnaround time). Only 4 tests can run at once.</li>
+            <li><b>Diagnose before it is too late.</b> Type the diagnosis. A wrong guess wastes 45&nbsp;seconds and hurts the patient.</li>
+            <li><b>Treat correctly.</b> Right management = recovery. Wrong or harmful management = death.</li>
+          </ol>
+        </section>
+
+        <section class="card">
+          <h2>Settings</h2>
+          <label class="switch">
+            <input type="checkbox" id="opt-sound" checked>
+            <span>Monitor alarms &amp; timers</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="opt-hints" checked>
+            <span>Allow hints (costs 25&nbsp;s each)</span>
+          </label>
+          <label class="field">
+            <span>Your name / handle (for the scorecard)</span>
+            <input type="text" id="opt-name" maxlength="24" placeholder="e.g. Dr. Sharma" autocomplete="nickname">
+          </label>
+        </section>
+      </aside>
+    </div>
+    <footer class="home-foot">
+      <p>Works offline. Add to home screen on your phone for a full-screen app.</p>
+    </footer>
+  </div>
+</section>
+
+<!-- ============================ PLAY SCREEN ============================ -->
+<section id="screen-play" class="screen">
+  <header id="hud">
+    <div class="hud-row hud-top">
+      <div class="hud-id">
+        <span id="hud-cat" class="pill pill-cat">--</span>
+        <span id="hud-diff" class="pill pill-diff">--</span>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-hint" class="btn btn-ghost btn-sm" type="button" title="Reveal a key clue (costs 25 seconds)">
+          Hint <span id="hint-count" class="badge">2</span>
+        </button>
+        <button id="btn-sound" class="btn btn-ghost btn-sm icon-btn" type="button" aria-label="Toggle sound">&#128266;</button>
+        <button id="btn-quit" class="btn btn-ghost btn-sm" type="button">End case</button>
+      </div>
+    </div>
+
+    <div class="gauges">
+      <div class="gauge gauge-time" id="gauge-time">
+        <div class="gauge-label">Time left</div>
+        <div class="gauge-value" id="time-left">10:00</div>
+        <div class="bar"><i id="time-bar"></i></div>
+      </div>
+      <div class="gauge gauge-cash">
+        <div class="gauge-label">Budget left</div>
+        <div class="gauge-value" id="cash-left">$0</div>
+        <div class="bar"><i id="cash-bar"></i></div>
+      </div>
+      <div class="gauge gauge-life">
+        <div class="gauge-label">Patient stability</div>
+        <div class="gauge-value" id="life-value">100%</div>
+        <div class="bar"><i id="life-bar"></i></div>
+      </div>
+    </div>
+
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Case sections">
+      <button class="tab is-on" role="tab" data-tab="patient" type="button">Patient</button>
+      <button class="tab" role="tab" data-tab="actions" type="button">Resuscitate</button>
+      <button class="tab" role="tab" data-tab="tests" type="button">Investigations <span id="test-count" class="badge">0</span></button>
+      <button class="tab" role="tab" data-tab="dx" type="button">Diagnose</button>
+      <button class="tab" role="tab" data-tab="rx" type="button">Treat</button>
+      <button class="tab" role="tab" data-tab="log" type="button">Log <span id="log-count" class="badge">0</span></button>
+    </nav>
+  </header>
+
+  <main class="play-grid">
+    <div class="pane" data-pane="patient">
+      <section class="card">
+        <h2 id="case-title">--</h2>
+        <p id="case-blurb" class="blurb"></p>
+        <div class="vitals-grid" id="vitals-grid"><!-- filled --></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Monitor trend</h2>
+          <div class="series-toggles" id="series-toggles"><!-- filled --></div>
+        </div>
+        <div class="chart-wrap">
+          <svg id="chart" viewBox="0 0 600 240" preserveAspectRatio="none" role="img" aria-label="Vital signs trend chart"></svg>
+        </div>
+        <p class="chart-note" id="chart-note">Each line is scaled to its own axis range.</p>
+      </section>
+
+      <section class="card">
+        <h2>History</h2>
+        <p id="case-who" class="who"></p>
+        <ul id="case-history" class="bullets"></ul>
+        <h3>Examination</h3>
+        <ul id="case-exam" class="bullets"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Pending &amp; completed tests <span id="pending-count" class="badge">0</span></h2>
+        <div id="pending-list" class="pending-list"></div>
+      </section>
+    </div>
+
+    <div class="pane" data-pane="actions" hidden>
+      <section class="card">
+        <h2>Resuscitation &amp; bedside measures</h2>
+        <p class="muted">Fast, mostly free. Doing the right thing early buys you time &mdash; the wrong thing costs the patient.</p>
+        <div id="actions-list" class="stack"></div>
+      </section>
+    </div>
+
+    <div class="pane" data-pane="tests" hidden>
+      <section class="card">
+        <div class="card-head">
+          <h2>Investigations</h2>
+          <div class="money-note">Funds left: <b id="money-inline">$0</b></div>
+        </div>
+        <p class="muted">Cost is charged when you order. Only 4 tests can be in the lab queue at once.</p>
+        <div id="tests-list" class="stack"></div>
+      </section>
+    </div>
+
+    <div class="pane" data-pane="dx" hidden>
+      <section class="card">
+        <h2>What is your diagnosis?</h2>
+        <p class="muted">Type it in. Be specific enough to be right. A wrong answer costs 45&nbsp;seconds and 6% stability.</p>
+        <form id="dx-form" class="dx-form" autocomplete="off">
+          <input type="text" id="dx-input" list="dx-options" placeholder="Type the diagnosis, e.g. &quot;diabetic ketoacidosis&quot;" aria-label="Diagnosis" required>
+          <datalist id="dx-options"></datalist>
+          <button class="btn btn-primary" type="submit">Confirm diagnosis</button>
+        </form>
+        <div id="dx-attempts" class="stack"></div>
+        <div id="dx-confirmed" class="verdict verdict-good" hidden></div>
+      </section>
+    </div>
+
+    <div class="pane" data-pane="rx" hidden>
+      <section class="card">
+        <div id="rx-locked" class="locked">
+          <h2>Management locked</h2>
+          <p class="muted">You must commit to a diagnosis before you can start definitive treatment. Go to the <b>Diagnose</b> tab.</p>
+        </div>
+        <div id="rx-open" hidden>
+          <h2>Management plan</h2>
+          <p class="muted">Select <b>every</b> measure this patient needs and nothing that will hurt them. Wrong selections cause harm.</p>
+          <div id="rx-list" class="stack stack-check"></div>
+          <div class="rx-actions">
+            <button id="btn-rx" class="btn btn-primary" type="button">Give treatment</button>
+            <span id="rx-hint" class="muted"></span>
+          </div>
+          <div id="rx-feedback" class="stack"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="pane" data-pane="log" hidden>
+      <section class="card">
+        <h2>Case log</h2>
+        <ul id="log-list" class="log"></ul>
+      </section>
+    </div>
+  </main>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="alarm" class="alarm" hidden></div>
+</section>
+
+<!-- ============================ RESULTS SCREEN ============================ -->
+<section id="screen-end" class="screen">
+  <div class="end-wrap">
+    <div id="outcome" class="outcome"></div>
+    <div class="end-grid">
+      <section class="card">
+        <h2>Scorecard</h2>
+        <div id="score-breakdown" class="breakdown"></div>
+        <div class="total-line">
+          <span>Total</span>
+          <b id="score-total">0</b>
+        </div>
+        <div class="rank-line" id="rank-line"></div>
+      </section>
+
+      <section class="card">
+        <h2>Debrief</h2>
+        <div id="debrief"></div>
+        <h3>Your case log</h3>
+        <ul id="end-log" class="log log-compact"></ul>
+      </section>
+
+      <section class="card share-card">
+        <h2>Publish your score</h2>
+        <p class="muted">Challenge your colleagues. The scorecard image carries your result and rank.</p>
+        <div class="share-row" id="share-row">
+          <button class="btn btn-primary" data-share="native" type="button">Share&hellip;</button>
+          <button class="btn btn-share x" data-share="x" type="button">X</button>
+          <button class="btn btn-share wa" data-share="whatsapp" type="button">WhatsApp</button>
+          <button class="btn btn-share fb" data-share="facebook" type="button">Facebook</button>
+          <button class="btn btn-share li" data-share="linkedin" type="button">LinkedIn</button>
+          <button class="btn btn-share tg" data-share="telegram" type="button">Telegram</button>
+          <button class="btn btn-ghost" data-share="copy" type="button">Copy text</button>
+          <button class="btn btn-ghost" data-share="image" type="button">Download card</button>
+        </div>
+        <canvas id="scorecard" width="1080" height="1080" class="scorecard-preview" aria-label="Generated scorecard image"></canvas>
+        <textarea id="share-text" class="share-text" rows="4" readonly aria-label="Share text"></textarea>
+      </section>
+    </div>
+
+    <div class="end-actions">
+      <button id="btn-again" class="btn btn-primary" type="button">Retry this case</button>
+      <button id="btn-next" class="btn" type="button">Next case</button>
+      <button id="btn-home" class="btn btn-ghost" type="button">Home</button>
+    </div>
+  </div>
+</section>
+
+<script src="cases.js"></script>
+<script src="cases-more.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
