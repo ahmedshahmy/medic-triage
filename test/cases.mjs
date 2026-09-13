@@ -10,7 +10,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ROOT } from './harness.mjs';
 
-const FILES = ['cases.js', 'cases-more.js', 'cases-emergency.js', 'cases-medicine.js', 'cases-complex.js'];
+const FILES = ['cases.js', 'cases-more.js', 'cases-emergency.js', 'cases-medicine.js', 'cases-complex.js',
+  'cases-firsthour.js', 'cases-cardioresp.js', 'cases-neurology.js', 'cases-infection.js', 'cases-poisoning.js', 'cases-metabolic.js', 'cases-womens-paeds.js'];
 
 let pass = 0, fail = 0;
 function check(name, ok, extra) {

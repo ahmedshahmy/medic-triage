@@ -725,10 +725,12 @@
     }
     for (const a of accepts) if (similarity(g, a.n) >= 0.87) return { ok: true };
     // typo tolerance: every significant word of the accepted phrase must appear
-    // as a word of the guess, allowing a couple of mistyped characters
+    // among the words of the guess, allowing a couple of mistyped characters.
+    // Short distinguishing words are kept: dropping them is how "bronchiectasis
+    // exacerbation" used to pass for "acute exacerbation of COPD".
     for (const a of accepts) {
-      const toks = a.n.split(' ').filter((t) => t.length >= 5);
-      if (toks.length && toks.every((t) => gWords.some((w) => w === t || similarity(w, t) >= 0.85))) {
+      const toks = a.n.split(' ').filter((t) => t.length >= 3 || SHORT_OK.indexOf(t) >= 0);
+      if (toks.length && toks.every((t) => gWords.some((w) => w === t || similarity(w, t) >= 0.8))) {
         return { ok: true };
       }
     }

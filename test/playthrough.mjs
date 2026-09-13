@@ -94,7 +94,8 @@ try {
     await cdp.eval(`document.querySelector('#btn-rx').click()`);
 
     // 6. let the patient recover
-    const ended = await waitFor(`document.querySelector('.screen.is-active').id === 'screen-end'`, 20000, 150);
+    // generous: at 15x a slow case can need a long real-time wait to finish recovering
+    const ended = await waitFor(`document.querySelector('.screen.is-active').id === 'screen-end'`, 60000, 200);
     const res = JSON.parse(await cdp.eval(`JSON.stringify({
       outcome: DocSim.state && DocSim.state.outcome,
       win: document.querySelector('#outcome').classList.contains('win'),

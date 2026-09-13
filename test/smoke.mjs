@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { ROOT, SHOTS, sleep, launch } from './harness.mjs';
 
 const PAGE = process.env.MT_URL || `file://${resolve(ROOT, 'index.html')}`;
-const EXPECTED_CASES = 18;   // keep in step with the case files
+const EXPECTED_CASES = 38;   // keep in step with the case files
 
 let pass = 0, fail = 0;
 function check(name, ok, extra) {

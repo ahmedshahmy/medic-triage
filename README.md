@@ -82,28 +82,51 @@ diagnosis, time used, budget left and your stability.
 
 ---
 
-## The eighteen cases
+## The thirty-eight cases
+
+Grouped by difficulty: **10 easy**, **18 moderate** and **10 hard** — 26 specialties and
+474 investigations in total.
 
 | Case | Specialty | Difficulty |
 |---|---|---|
-| Crushing chest pain in a 58-year-old smoker | Cardiology (STEMI) | Easy |
-| Drowsy teenager who cannot stop drinking and passing urine | Endocrinology (DKA) | Easy |
-| Farmer with pinpoint pupils, sweating and a slow pulse | Toxicology (organophosphate) | Easy |
-| Young asthmatic who can no longer finish a sentence | Respiratory (near-fatal asthma) | Easy |
-| Unresponsive young man in a park with pinpoint pupils | Toxicology (opioid overdose) | Easy |
-| Fever, headache and a spreading rash in a university student | Infectious disease (meningococcal) | Moderate |
-| Sudden breathlessness and collapse eight days after knee surgery | Respiratory (high-risk PE) | Moderate |
-| Day five of fever, now with abdominal pain and bleeding gums | Tropical medicine (dengue shock) | Moderate |
-| Seizure that will not stop after two days of diarrhoea | Neurology (status epilepticus) | Moderate |
-| Collapse with severe pelvic pain in a woman with seven weeks of amenorrhoea | Obstetrics (ruptured ectopic) | Moderate |
-| Vomiting large volumes of blood in known alcoholic cirrhosis | Hepatology (bleeding varices) | Moderate |
-| Four days of cough and fever, now confused and hypotensive | Respiratory (severe CAP with sepsis) | Moderate |
-| Epigastric pain boring through to the back after a drinking binge | Gastroenterology (severe pancreatitis) | Moderate |
-| Confusion and a seizure in a man on a thiazide | Nephrology (severe hyponatraemia) | Hard |
-| Known Addison disease, vomiting for four days and barely responsive | Endocrinology (adrenal crisis) | Hard |
-| Confused elderly woman with a pulse of 38 and yellow vision | Toxicology (digoxin toxicity) | Hard |
-| Fever of 40.6 C and a racing irregular pulse in known Graves disease | Endocrinology (thyroid storm) | Hard |
-| Weak, palpitations and a pulse of 48 on ramipril and spironolactone | Nephrology (severe hyperkalaemia with AKI) | Hard |
+| Crushing chest pain in a 58-year-old smoker | Cardiology | Easy |
+| Drowsy teenager who cannot stop drinking and passing urine | Endocrinology | Easy |
+| Farmer with pinpoint pupils, sweating and a slow pulse | Toxicology | Easy |
+| Young asthmatic who can no longer finish a sentence | Respiratory | Easy |
+| Unresponsive young man in a park with pinpoint pupils | Toxicology | Easy |
+| Wasp sting at a picnic, now wheezing with a pulse of 138 | Emergency medicine | Easy |
+| Fall from a ladder, now hypoxic with distended neck veins | Respiratory / Emergency | Easy |
+| Confused elderly diabetic who missed lunch | Endocrinology | Easy |
+| Teenager woken by sudden severe testicular pain | Urology | Easy |
+| Drowsy COPD patient given 15 litres of oxygen by the ambulance crew | Respiratory | Easy |
+| Fever, headache and a spreading rash in a university student | Infectious disease | Moderate |
+| Sudden breathlessness and collapse eight days after knee surgery | Respiratory / Thrombosis | Moderate |
+| Day five of fever, now with abdominal pain and bleeding gums | Tropical medicine | Moderate |
+| Seizure that will not stop after two days of diarrhoea | Neurology | Moderate |
+| Collapse with severe pelvic pain in a woman with seven weeks of amenorrhoea | Obstetrics & Gynaecology | Moderate |
+| Vomiting large volumes of blood in known alcoholic cirrhosis | Hepatology / Gastroenterology | Moderate |
+| Four days of cough and fever, now confused and hypotensive | Respiratory / Infectious disease | Moderate |
+| Epigastric pain boring through to the back after a drinking binge | Gastroenterology | Moderate |
+| Sitting bolt upright with pink frothy sputum | Cardiology | Moderate |
+| Fever, strange smells and a personality change | Neurology / Infectious disease | Moderate |
+| Sudden weakness and loss of speech ninety minutes ago | Neurology | Moderate |
+| Three weeks of fever and night sweats with a new heart murmur | Infectious disease / Cardiology | Moderate |
+| Twelve days after chemotherapy, fever with no obvious source | Oncology / Infectious disease | Moderate |
+| Fever and drowsiness six days after returning from Nigeria | Tropical medicine | Moderate |
+| Drooping eyelids and slurred swallowing two hours after a bite | Toxicology / Tropical medicine | Moderate |
+| Three days into a hospital admission, now seeing insects on the wall | Addiction medicine | Moderate |
+| Heavy bleeding twenty minutes after a normal delivery | Obstetrics | Moderate |
+| A nine-month-old with screaming episodes and redcurrant-jelly stool | Paediatrics | Moderate |
+| Confusion and a seizure in a man on a thiazide | Nephrology / Neurology | Hard |
+| Known Addison disease, vomiting for four days and now barely responsive | Endocrinology | Hard |
+| Confused elderly woman with a pulse of 38 and yellow vision | Toxicology / Cardiology | Hard |
+| Fever of 40.6 C and a racing irregular pulse in known Graves disease | Endocrinology | Hard |
+| Weak, palpitations and a pulse of 48 in a patient on ramipril and spironolactone | Nephrology | Hard |
+| Hypotensive, distended neck veins and a quiet heart after a viral illness | Cardiology | Hard |
+| Agitated, sweating and shaking after a new antidepressant and tramadol | Toxicology | Hard |
+| Breathing fast, ringing in the ears and vomiting after an overdose | Toxicology | Hard |
+| Found unconscious in an unheated flat, with a temperature of 33.5 C | Endocrinology | Hard |
+| Confused, constipated and profoundly weak in metastatic lung cancer | Endocrinology / Oncology | Hard |
 
 Every test result, management option and debrief is written to teach the decision that actually
 changes outcome — including several deliberately harmful options that are commonly chosen in real life.
@@ -191,7 +214,7 @@ matcher accepts the canonical answer and your natural phrasing while rejecting e
 
 **Diagnosis matching** normalises the text (case, punctuation, stop-words, British/American spelling),
 then: rejects anything hitting a `reject` row → exact match → every significant word of an accepted
-phrase present → typo tolerance (≈85% similarity per word). Anything else is wrong.
+phrase present → typo tolerance (every significant word must match, allowing a couple of mistyped characters). Anything else is wrong.
 
 ---
 
@@ -201,7 +224,8 @@ phrase present → typo tolerance (≈85% similarity per word). Anything else is
 npm test                  # all three suites
 node test/cases.mjs       # case library validation — no browser, milliseconds
 node test/smoke.mjs       # end-to-end UI, engine, failure paths, layout (needs google-chrome)
-node test/playthrough.mjs # plays all 18 cases correctly and requires a full recovery
+node test/playthrough.mjs # plays all 38 cases correctly and requires a full recovery
+node test/matcher-report.mjs # prints what the diagnosis matcher accepts, per case
 ```
 
 `cases.mjs` needs nothing but Node: it loads the case files exactly as the browser does, then audits
@@ -216,7 +240,7 @@ sizes, overflow and the wide-screen layout, and fails on any console error.
 
 `playthrough.mjs` runs the page clock at 15×, resuscitates, orders the high-yield investigations,
 types the canonical diagnosis and gives the full correct management bundle for **every** case, asserting
-that all eighteen end in a full recovery inside the budget. Screenshots land in `test/shots/`.
+that all thirty-eight end in a full recovery inside the budget. Screenshots land in `test/shots/`.
 
 ---
 
@@ -226,13 +250,17 @@ that all eighteen end in a full recovery inside the budget. Screenshots land in 
 |---|---|
 | `index.html` | Screens: home, play (HUD, monitor, panes) and results |
 | `styles.css` | Dark clinical theme, mobile-first, responsive to two columns |
-| `cases.js`, `cases-more.js` | Case library, parts 1-2 (8 cases) |
-| `cases-emergency.js`, `cases-medicine.js`, `cases-complex.js` | Case library, parts 3-5 (10 cases) |
+| `cases.js`, `cases-more.js` | Case library, parts 1-2 |
+| `cases-emergency.js`, `cases-medicine.js`, `cases-complex.js` | Case library, parts 3-5 |
+| `cases-firsthour.js`, `cases-cardioresp.js`, `cases-neurology.js` | Case library, parts 6-8 |
+| `cases-infection.js`, `cases-poisoning.js`, `cases-metabolic.js` | Case library, parts 9-11 |
+| `cases-womens-paeds.js` | Case library, part 12 |
 | `game.js` | Clock, physiology, lab queue, matcher, scoring, sharing |
 | `manifest.webmanifest`, `icon.svg` | Home-screen install metadata |
 | `test/harness.mjs` | Shared headless-Chrome/CDP harness |
 | `test/cases.mjs` | Case library validation and balance audit (no browser) |
 | `test/smoke.mjs`, `test/playthrough.mjs` | End-to-end browser tests |
+| `test/matcher-report.mjs` | Diagnosis matcher report, for case authors |
 
 ---
 
