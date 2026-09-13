@@ -80,18 +80,28 @@ diagnosis, time used, budget left and your stability.
 
 ---
 
-## The eight cases
+## The eighteen cases
 
 | Case | Specialty | Difficulty |
 |---|---|---|
 | Crushing chest pain in a 58-year-old smoker | Cardiology (STEMI) | Easy |
 | Drowsy teenager who cannot stop drinking and passing urine | Endocrinology (DKA) | Easy |
 | Farmer with pinpoint pupils, sweating and a slow pulse | Toxicology (organophosphate) | Easy |
+| Young asthmatic who can no longer finish a sentence | Respiratory (near-fatal asthma) | Easy |
+| Unresponsive young man in a park with pinpoint pupils | Toxicology (opioid overdose) | Easy |
 | Fever, headache and a spreading rash in a university student | Infectious disease (meningococcal) | Moderate |
 | Sudden breathlessness and collapse eight days after knee surgery | Respiratory (high-risk PE) | Moderate |
-| Day five of fever, now with abdominal pain and bleeding gums | Tropical medicine (dengue) | Moderate |
+| Day five of fever, now with abdominal pain and bleeding gums | Tropical medicine (dengue shock) | Moderate |
+| Seizure that will not stop after two days of diarrhoea | Neurology (status epilepticus) | Moderate |
+| Collapse with severe pelvic pain in a woman with seven weeks of amenorrhoea | Obstetrics (ruptured ectopic) | Moderate |
+| Vomiting large volumes of blood in known alcoholic cirrhosis | Hepatology (bleeding varices) | Moderate |
+| Four days of cough and fever, now confused and hypotensive | Respiratory (severe CAP with sepsis) | Moderate |
+| Epigastric pain boring through to the back after a drinking binge | Gastroenterology (severe pancreatitis) | Moderate |
 | Confusion and a seizure in a man on a thiazide | Nephrology (severe hyponatraemia) | Hard |
 | Known Addison disease, vomiting for four days and barely responsive | Endocrinology (adrenal crisis) | Hard |
+| Confused elderly woman with a pulse of 38 and yellow vision | Toxicology (digoxin toxicity) | Hard |
+| Fever of 40.6 C and a racing irregular pulse in known Graves disease | Endocrinology (thyroid storm) | Hard |
+| Weak, palpitations and a pulse of 48 on ramipril and spironolactone | Nephrology (severe hyperkalaemia with AKI) | Hard |
 
 Every test result, management option and debrief is written to teach the decision that actually
 changes outcome — including several deliberately harmful options that are commonly chosen in real life.
@@ -100,8 +110,9 @@ changes outcome — including several deliberately harmful options that are comm
 
 ## Adding your own cases
 
-Cases are plain objects in `cases.js` and `cases-more.js`. The engine is generic: **add an object to
-the array and it appears in the menu.** Minimum viable template:
+Cases are plain objects in `cases.js`, `cases-more.js`, `cases-emergency.js`, `cases-medicine.js` and
+`cases-complex.js`. The engine is generic: **add an object to the array and it appears in the menu.**
+Minimum viable template:
 
 ```js
 add({
@@ -167,10 +178,14 @@ add({
 });
 ```
 
-Rules the smoke test enforces for every case: unique ids, at least 8 tests, 6 actions, 5 correct and
-3 harmful management options, a differential list with at least 5 real distractors, a critical-flagged
-test, an affordable essential spend, and a diagnosis matcher that accepts the canonical answer (and
-your natural phrasing) while rejecting every distractor.
+`test/cases.mjs` enforces the rules for every case: unique ids, at least 8 investigations and 6 bedside
+actions, 5 correct and 3 harmful management options, a differential list with at least 5 real
+distractors, a critical-flagged investigation, every scripted event referring to an action or test that
+actually exists, and a balance check — the essential path must fit the budget, the whole action list
+must stay affordable (so mistakes remain reachable), the budget must *not* stretch to every
+investigation plus the essential treatment (so money always forces a choice), and an untreated patient
+must deteriorate before the clock runs out. `test/smoke.mjs` additionally proves that the diagnosis
+matcher accepts the canonical answer and your natural phrasing while rejecting every distractor.
 
 **Diagnosis matching** normalises the text (case, punctuation, stop-words, British/American spelling),
 then: rejects anything hitting a `reject` row → exact match → every significant word of an accepted
@@ -181,20 +196,25 @@ phrase present → typo tolerance (≈85% similarity per word). Anything else is
 ## Testing
 
 ```bash
-npm test                  # both suites (needs google-chrome, or set CHROME=/path/to/chrome)
-node test/smoke.mjs       # end-to-end UI, engine, failure paths, layout
-node test/playthrough.mjs # plays all 8 cases correctly and requires a full recovery
+npm test                  # all three suites
+node test/cases.mjs       # case library validation — no browser, milliseconds
+node test/smoke.mjs       # end-to-end UI, engine, failure paths, layout (needs google-chrome)
+node test/playthrough.mjs # plays all 18 cases correctly and requires a full recovery
 ```
 
-`smoke.mjs` drives the real app in headless Chrome over CDP at a 390×844 phone viewport: it validates
-every case file, checks the diagnosis matcher against all 80 differentials, plays a complete winning
-STEMI run (actions, lab queue, wrong diagnosis, correct diagnosis, full management, recovery, score,
-share text, scorecard canvas), exercises the budget cap, the death path, the timeout path, hints,
-tab switching, tap-target sizes, overflow and the wide-screen layout, and fails on any console error.
+`cases.mjs` needs nothing but Node: it loads the case files exactly as the browser does, then audits
+the schema, the internal references and the playability balance of every case, and prints a balance
+table (budget, essential spend, time to arrest with and without treatment, and the size of each case).
+
+`smoke.mjs` drives the real app in headless Chrome over CDP at a 390×844 phone viewport: it checks the
+diagnosis matcher against all 180 differentials, plays a complete winning STEMI run (actions, lab
+queue, wrong diagnosis, correct diagnosis, full management, recovery, score, share text, scorecard
+canvas), exercises the budget cap, the death path, the timeout path, hints, tab switching, tap-target
+sizes, overflow and the wide-screen layout, and fails on any console error.
 
 `playthrough.mjs` runs the page clock at 15×, resuscitates, orders the high-yield investigations,
 types the canonical diagnosis and gives the full correct management bundle for **every** case, asserting
-that all eight end in a full recovery inside the budget. Screenshots land in `test/shots/`.
+that all eighteen end in a full recovery inside the budget. Screenshots land in `test/shots/`.
 
 ---
 
@@ -204,10 +224,12 @@ that all eight end in a full recovery inside the budget. Screenshots land in `te
 |---|---|
 | `index.html` | Screens: home, play (HUD, monitor, panes) and results |
 | `styles.css` | Dark clinical theme, mobile-first, responsive to two columns |
-| `cases.js`, `cases-more.js` | The case library (8 cases) |
+| `cases.js`, `cases-more.js` | Case library, parts 1-2 (8 cases) |
+| `cases-emergency.js`, `cases-medicine.js`, `cases-complex.js` | Case library, parts 3-5 (10 cases) |
 | `game.js` | Clock, physiology, lab queue, matcher, scoring, sharing |
 | `manifest.webmanifest`, `icon.svg` | Home-screen install metadata |
 | `test/harness.mjs` | Shared headless-Chrome/CDP harness |
+| `test/cases.mjs` | Case library validation and balance audit (no browser) |
 | `test/smoke.mjs`, `test/playthrough.mjs` | End-to-end browser tests |
 
 ---

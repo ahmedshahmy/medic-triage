@@ -130,7 +130,7 @@ window.CASES = window.CASES || [];
     difficulty: 'moderate',
     blurb: 'The fever has broken, but the patient is worse: severe abdominal pain, vomiting, cold hands and bleeding gums.',
     timeLimitSec: 600,
-    budget: 2100,
+    budget: 1900,
     who: 'Mr. A., 28-year-old software engineer. Five days of high fever with severe body aches and headache. The fever settled this morning, but he now has severe abdominal pain, repeated vomiting and bleeding from the gums.',
     history: [
       'Day 1-4: high fever 39-40 C with retro-orbital headache, myalgia and a transient blanching rash on the trunk.',
@@ -343,7 +343,7 @@ window.CASES = window.CASES || [];
     difficulty: 'hard',
     blurb: 'She stopped her hydrocortisone because she could not keep the tablets down. Now shocked, hyponatraemic and hypoglycaemic.',
     timeLimitSec: 600,
-    budget: 2200,
+    budget: 2000,
     who: 'Ms. P., 42-year-old teacher with known primary adrenal insufficiency (Addison disease) on hydrocortisone and fludrocortisone. Four days of a flu-like illness with vomiting and diarrhoea; she stopped her tablets because they would not stay down.',
     history: [
       'Four days of fever, sore throat, vomiting and watery diarrhoea; she has taken nothing by mouth reliably since yesterday.',
@@ -366,7 +366,7 @@ window.CASES = window.CASES || [];
       { at: 120, need: ['action:hydrocortisone'], loss: 18, msg: 'No steroid has been given. This is a steroid-dependent patient in shock — the blood pressure is now 68/40 and she is barely responsive.' },
       { at: 260, need: ['action:fluids'], loss: 12, msg: 'No volume resuscitation: profound hypovolaemia in a patient with mineralocorticoid deficiency.' },
       { at: 380, need: ['action:dextrose'], loss: 10, msg: 'The glucose has fallen to 2.1 mmol/L — hypoglycaemia is deepening the coma.' },
-      { at: 470, need: ['test:k'], loss: 8, msg: 'Potassium has never been checked. The ECG now shows peaked T waves with a broadened QRS.' }
+      { at: 470, need: ['test:ue4'], loss: 8, msg: 'Potassium has never been checked. The ECG now shows peaked T waves with a broadened QRS.' }
     ],
     actions: [
       A('hydrocortisone', 'IV hydrocortisone 100 mg immediately, then 200 mg per 24 hours', 'Seconds matter in an Addisonian crisis.', { cost: 60, tat: 5, factor: 0.33, msg: 'Hydrocortisone given within a minute of the diagnosis being considered. Vascular tone and glucose will start to recover within the hour.' }),

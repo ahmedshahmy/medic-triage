@@ -125,10 +125,11 @@ try {
     saved: document.querySelectorAll('#career-stats .stat .v')[1].textContent,
     best: document.querySelectorAll('#career-stats .stat .v')[3].textContent,
     bests: document.querySelectorAll('#case-list .best').length })`));
+  const N = ids.length;
   console.log('\n  record: ' + JSON.stringify(career));
-  check('all eight playthroughs counted in the record', career.played === '8' && career.saved === '8',
-    JSON.stringify(career));
-  check('every case list entry shows a best score', career.bests === 8, String(career.bests));
+  check(`all ${N} playthroughs counted in the record`,
+    career.played === String(N) && career.saved === String(N), JSON.stringify(career));
+  check('every case list entry shows a best score', career.bests === N, String(career.bests));
   await app.shot('09-playthrough-home.png');
 
   const errs = cdp.errors();

@@ -89,6 +89,16 @@ export async function launch({ url, width = 390, height = 844, mobile = true, sp
   await cdp.send('Emulation.setDeviceMetricsOverride',
     { width, height, deviceScaleFactor: mobile ? 2 : 1, mobile });
 
+  // wait for the app to finish booting rather than guessing at a sleep
+  for (let i = 0; i < 120; i++) {
+    try {
+      const ready = await cdp.eval(
+        'document.readyState === "complete" && !!(window.MediTriage && window.CASES && window.CASES.length)');
+      if (ready) break;
+    } catch { /* page may still be loading */ }
+    await sleep(250);
+  }
+
   if (speed !== 1) {
     // scale the page clock: 30x speed turns a 10-minute case into 20 seconds
     await cdp.eval(`(() => {

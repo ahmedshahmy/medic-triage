@@ -5,7 +5,8 @@
   "description": "MediTriage — a ten-minute, budget-limited medical diagnostic game. Zero dependencies, no build step.",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "node test/smoke.mjs && node test/playthrough.mjs",
+    "test": "node test/cases.mjs && node test/smoke.mjs && node test/playthrough.mjs",
+    "test:cases": "node test/cases.mjs",
     "test:smoke": "node test/smoke.mjs",
     "test:play": "node test/playthrough.mjs"
   },

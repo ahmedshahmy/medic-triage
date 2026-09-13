@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 import { ROOT, SHOTS, sleep, launch } from './harness.mjs';
 
 const PAGE = process.env.MT_URL || `file://${resolve(ROOT, 'index.html')}`;
+const EXPECTED_CASES = 18;   // keep in step with the case files
 
 let pass = 0, fail = 0;
 function check(name, ok, extra) {
@@ -28,7 +29,7 @@ try {
   const ready = await cdp.eval('!!(window.MediTriage && window.CASES && window.CASES.length)');
   check('app boots and exposes MediTriage', ready === true);
   const n = await cdp.eval('window.CASES.length');
-  check('case library loaded (expect 8)', n === 8, 'got ' + n);
+  check(`case library loaded (expect ${EXPECTED_CASES})`, n === EXPECTED_CASES, 'got ' + n);
 
   const problems = await cdp.eval(`(() => {
     const req = ['id','title','category','difficulty','blurb','timeLimitSec','budget','who','history','exam',
@@ -95,7 +96,7 @@ try {
     title: document.title })`);
   const h = JSON.parse(home);
   check('start screen is active', h.active === 'screen-start', h.active);
-  check('all cases listed', h.cases === 8, 'got ' + h.cases);
+  check('all cases listed', h.cases === EXPECTED_CASES, 'got ' + h.cases);
   check('career panel rendered', h.stats === 4, 'got ' + h.stats);
   await shot('01-home.png');
 
@@ -119,7 +120,7 @@ try {
   check('play screen active', p.active === 'screen-play', p.active);
   check('pre-start gate shown (clock not running yet)', p.gate === true);
   check('clock shows 10:00', p.time === '10:00', p.time);
-  check('budget shows $2,200', p.money === '$2,200', p.money);
+  check('budget shows the case budget', p.money === '$1,500', p.money);
   check('stability 100%', p.life === '100%', p.life);
   check('actions rendered (10)', p.actions === 10, 'got ' + p.actions);
   check('tests rendered (13)', p.tests === 13, 'got ' + p.tests);

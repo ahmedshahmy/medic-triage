@@ -29,7 +29,7 @@ window.CASES = window.CASES || [];
     difficulty: 'easy',
     blurb: 'Ninety minutes of crushing central chest pain, cold and clammy, still sweating.',
     timeLimitSec: 600,
-    budget: 2200,
+    budget: 1500,
     who: 'Mr. R.K., 58-year-old autorickshaw driver. Smoker (30 pack-years), type 2 diabetes on metformin, no previous cardiac history. Father died of a "heart attack" at 62.',
     history: [
       '90 minutes of severe retrosternal chest pain, "like an elephant sitting on my chest", radiating to the left arm and jaw.',
@@ -142,7 +142,7 @@ window.CASES = window.CASES || [];
     difficulty: 'easy',
     blurb: 'Two weeks of thirst and weight loss, three days of vomiting, now drowsy with deep sighing breathing.',
     timeLimitSec: 600,
-    budget: 1900,
+    budget: 1600,
     who: 'Ms. A., 19-year-old student. No known diabetes. Two weeks of increasing thirst, frequent urination and 5 kg weight loss; three days of vomiting and abdominal pain. Mother noticed she was breathing "like after running".',
     history: [
       'Polyuria, polydipsia and nocturia for two weeks with marked weight loss despite a good appetite.',
@@ -249,7 +249,7 @@ window.CASES = window.CASES || [];
     difficulty: 'easy',
     blurb: 'Brought in 40 minutes after drinking from an insecticide bottle. Wet, wheezing and barely conscious.',
     timeLimitSec: 600,
-    budget: 1800,
+    budget: 1600,
     who: 'Mr. S., 34-year-old farmer. Found by his brother beside an empty 100 mL bottle of dichlorvos ("Nuvan") after an argument at home. Vomiting, drooling and incontinent of stool on the way in.',
     history: [
       'Deliberate ingestion of roughly 50 mL of concentrated organophosphate about 40 minutes ago.',
@@ -351,7 +351,7 @@ window.CASES = window.CASES || [];
     difficulty: 'moderate',
     blurb: 'Two days of headache and fever, now photophobic and confused, with a purpuric rash appearing on the legs.',
     timeLimitSec: 600,
-    budget: 2400,
+    budget: 2200,
     who: 'Ms. F., 24-year-old university student, no significant past medical history. Two days of severe generalised headache, fever and vomiting. This morning she was confused and a rash appeared on both shins.',
     history: [
       'Two days of severe, generalised, throbbing headache with fever, rigors and repeated vomiting.',
