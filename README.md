@@ -87,46 +87,51 @@ diagnosis, time used, budget left and your stability.
 Grouped by difficulty: **10 easy**, **18 moderate** and **10 hard** — 26 specialties and
 474 investigations in total.
 
+**Titles are presentations, not answers.** The case list gives an age, a sex and a presenting
+complaint; the specialty is withheld until the debrief, so the diagnosis has to be worked out from
+the history, the examination and the investigations you choose to buy. The audit refuses any title or
+blurb that the diagnosis matcher would accept as a diagnosis in its own right.
+
 | Case | Specialty | Difficulty |
 |---|---|---|
-| Crushing chest pain in a 58-year-old smoker | Cardiology | Easy |
-| Drowsy teenager who cannot stop drinking and passing urine | Endocrinology | Easy |
-| Farmer with pinpoint pupils, sweating and a slow pulse | Toxicology | Easy |
-| Young asthmatic who can no longer finish a sentence | Respiratory | Easy |
-| Unresponsive young man in a park with pinpoint pupils | Toxicology | Easy |
-| Wasp sting at a picnic, now wheezing with a pulse of 138 | Emergency medicine | Easy |
-| Fall from a ladder, now hypoxic with distended neck veins | Respiratory / Emergency | Easy |
-| Confused elderly diabetic who missed lunch | Endocrinology | Easy |
-| Teenager woken by sudden severe testicular pain | Urology | Easy |
-| Drowsy COPD patient given 15 litres of oxygen by the ambulance crew | Respiratory | Easy |
-| Fever, headache and a spreading rash in a university student | Infectious disease | Moderate |
-| Sudden breathlessness and collapse eight days after knee surgery | Respiratory / Thrombosis | Moderate |
-| Day five of fever, now with abdominal pain and bleeding gums | Tropical medicine | Moderate |
-| Seizure that will not stop after two days of diarrhoea | Neurology | Moderate |
-| Collapse with severe pelvic pain in a woman with seven weeks of amenorrhoea | Obstetrics & Gynaecology | Moderate |
-| Vomiting large volumes of blood in known alcoholic cirrhosis | Hepatology / Gastroenterology | Moderate |
-| Four days of cough and fever, now confused and hypotensive | Respiratory / Infectious disease | Moderate |
-| Epigastric pain boring through to the back after a drinking binge | Gastroenterology | Moderate |
-| Sitting bolt upright with pink frothy sputum | Cardiology | Moderate |
-| Fever, strange smells and a personality change | Neurology / Infectious disease | Moderate |
-| Sudden weakness and loss of speech ninety minutes ago | Neurology | Moderate |
-| Three weeks of fever and night sweats with a new heart murmur | Infectious disease / Cardiology | Moderate |
-| Twelve days after chemotherapy, fever with no obvious source | Oncology / Infectious disease | Moderate |
-| Fever and drowsiness six days after returning from Nigeria | Tropical medicine | Moderate |
-| Drooping eyelids and slurred swallowing two hours after a bite | Toxicology / Tropical medicine | Moderate |
-| Three days into a hospital admission, now seeing insects on the wall | Addiction medicine | Moderate |
+| Severe chest pain at rest in a 58-year-old man | Cardiology | Easy |
+| Two weeks of thirst and weight loss in a 19-year-old student | Endocrinology | Easy |
+| A 34-year-old farm worker, drowsy and drenched in sweat | Toxicology | Easy |
+| A 24-year-old woman who can no longer finish a sentence | Respiratory | Easy |
+| An unresponsive 24-year-old man found on a park bench | Toxicology | Easy |
+| Sudden wheeze and rash at a picnic | Emergency medicine | Easy |
+| A fall from a ladder in a 42-year-old roofer | Respiratory / Emergency | Easy |
+| A 74-year-old woman found drowsy by her carer | Endocrinology | Easy |
+| A 16-year-old woken by sudden scrotal pain | Urology | Easy |
+| Breathlessness and drowsiness in a 68-year-old man | Respiratory | Easy |
+| Two days of fever and headache in a 24-year-old student | Infectious disease | Moderate |
+| Sudden breathlessness and a blackout in a 62-year-old woman | Respiratory / Thrombosis | Moderate |
+| A 28-year-old man whose fever has settled but who feels worse | Tropical medicine | Moderate |
+| A convulsion that has lasted twelve minutes in a 34-year-old man | Neurology | Moderate |
+| Sudden severe lower abdominal pain in a 26-year-old woman | Obstetrics & Gynaecology | Moderate |
+| Vomiting large volumes of blood in a 52-year-old man | Hepatology / Gastroenterology | Moderate |
+| Four days of cough and fever in a 66-year-old woman | Respiratory / Infectious disease | Moderate |
+| Severe upper abdominal pain in a 45-year-old man | Gastroenterology | Moderate |
+| Two days of breathlessness in a 72-year-old man | Cardiology | Moderate |
+| Fever and odd behaviour in a 41-year-old man | Neurology / Infectious disease | Moderate |
+| Sudden weakness and loss of speech in a 71-year-old man | Neurology | Moderate |
+| Three weeks of fever and weight loss in a 38-year-old man | Infectious disease / Cardiology | Moderate |
+| Fever and rigors in a 54-year-old woman | Oncology / Infectious disease | Moderate |
+| Fever and drowsiness in a 29-year-old man | Tropical medicine | Moderate |
+| Weakness and difficulty swallowing in a 31-year-old farm worker | Toxicology / Tropical medicine | Moderate |
+| Agitation and confusion three days into a hospital admission | Addiction medicine | Moderate |
 | Heavy bleeding twenty minutes after a normal delivery | Obstetrics | Moderate |
-| A nine-month-old with screaming episodes and redcurrant-jelly stool | Paediatrics | Moderate |
-| Confusion and a seizure in a man on a thiazide | Nephrology / Neurology | Hard |
-| Known Addison disease, vomiting for four days and now barely responsive | Endocrinology | Hard |
-| Confused elderly woman with a pulse of 38 and yellow vision | Toxicology / Cardiology | Hard |
-| Fever of 40.6 C and a racing irregular pulse in known Graves disease | Endocrinology | Hard |
-| Weak, palpitations and a pulse of 48 in a patient on ramipril and spironolactone | Nephrology | Hard |
-| Hypotensive, distended neck veins and a quiet heart after a viral illness | Cardiology | Hard |
-| Agitated, sweating and shaking after a new antidepressant and tramadol | Toxicology | Hard |
-| Breathing fast, ringing in the ears and vomiting after an overdose | Toxicology | Hard |
-| Found unconscious in an unheated flat, with a temperature of 33.5 C | Endocrinology | Hard |
-| Confused, constipated and profoundly weak in metastatic lung cancer | Endocrinology / Oncology | Hard |
+| A nine-month-old who will not stop screaming | Paediatrics | Moderate |
+| Three days of confusion and unsteadiness in a 68-year-old man | Nephrology / Neurology | Hard |
+| Four days of vomiting in a 42-year-old woman, now barely responsive | Endocrinology | Hard |
+| Confusion and vomiting in a 78-year-old woman | Toxicology / Cardiology | Hard |
+| Fever and agitation in a 34-year-old woman with a racing pulse | Endocrinology | Hard |
+| Weakness and palpitations in a 68-year-old man | Nephrology | Hard |
+| Breathlessness and dizziness three weeks after a flu-like illness | Cardiology | Hard |
+| Agitation and sweating in a 28-year-old man | Toxicology | Hard |
+| Rapid breathing and vomiting in a 22-year-old woman | Toxicology | Hard |
+| An unconscious 76-year-old woman found at home | Endocrinology | Hard |
+| Confusion and weakness in a 66-year-old man | Endocrinology / Oncology | Hard |
 
 Every test result, management option and debrief is written to teach the decision that actually
 changes outcome — including several deliberately harmful options that are commonly chosen in real life.

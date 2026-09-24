@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'snakebite',
-    title: 'Drooping eyelids and slurred swallowing two hours after a bite',
+    title: 'Weakness and difficulty swallowing in a 31-year-old farm worker',
     category: 'Toxicology / Tropical medicine',
     difficulty: 'moderate',
-    blurb: 'Bitten on the ankle while harvesting; the wound looks trivial but he cannot keep his eyes open.',
+    blurb: 'Two hours after working in the paddy field he began to see double.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Mr. R., 31-year-old rice farmer bitten on the right ankle two hours ago while working in the paddy field. He killed the snake and brought it in a cloth bag. He now has drooping eyelids, double vision and difficulty swallowing his own saliva, and his voice has become nasal.',
@@ -120,10 +120,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'salicylate',
-    title: 'Breathing fast, ringing in the ears and vomiting after an overdose',
+    title: 'Rapid breathing and vomiting in a 22-year-old woman',
     category: 'Toxicology',
     difficulty: 'hard',
-    blurb: 'Six hours after taking sixty aspirin tablets: tachypnoeic, sweaty, confused and profoundly acidotic underneath.',
+    blurb: 'Six hours of ringing in the ears, sweating and confusion.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Ms. E., 22-year-old student brought in by her flatmate six hours after taking about sixty 500 mg aspirin tablets (30 g) in a deliberate overdose, together with some alcohol. She has vomited repeatedly and is now breathing deeply and rapidly, sweating and confused, complaining of ringing in her ears.',
@@ -224,10 +224,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'deliriumtremens',
-    title: 'Three days into a hospital admission, now seeing insects on the wall',
+    title: 'Agitation and confusion three days into a hospital admission',
     category: 'Addiction medicine',
     difficulty: 'moderate',
-    blurb: 'A heavy drinker admitted with cellulitis who stopped abruptly: tremor, drenching sweats, hallucinations and a seizure.',
+    blurb: 'He is tremulous, sweating, and seeing insects that are not there.',
     timeLimitSec: 600,
     budget: 1300,
     who: 'Mr. W., 46-year-old builder, admitted three days ago with cellulitis of the left leg. He drinks about a litre of spirits daily and has had nothing since admission. He has become increasingly tremulous and agitated, is seeing insects crawling on the wall, and had a generalised seizure two hours ago.',

@@ -24,10 +24,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'stemi',
-    title: 'Crushing chest pain in a 58-year-old smoker',
+    title: 'Severe chest pain at rest in a 58-year-old man',
     category: 'Cardiology',
     difficulty: 'easy',
-    blurb: 'Ninety minutes of crushing central chest pain, cold and clammy, still sweating.',
+    blurb: 'Ninety minutes of chest pain that began while he was watching television.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Mr. R.K., 58-year-old autorickshaw driver. Smoker (30 pack-years), type 2 diabetes on metformin, no previous cardiac history. Father died of a "heart attack" at 62.',
@@ -137,10 +137,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'dka',
-    title: 'Drowsy teenager who cannot stop drinking and passing urine',
+    title: 'Two weeks of thirst and weight loss in a 19-year-old student',
     category: 'Endocrinology',
     difficulty: 'easy',
-    blurb: 'Two weeks of thirst and weight loss, three days of vomiting, now drowsy with deep sighing breathing.',
+    blurb: 'Three days of vomiting and abdominal pain; the family thought it was a stomach bug.',
     timeLimitSec: 600,
     budget: 1600,
     who: 'Ms. A., 19-year-old student. No known diabetes. Two weeks of increasing thirst, frequent urination and 5 kg weight loss; three days of vomiting and abdominal pain. Mother noticed she was breathing "like after running".',
@@ -244,10 +244,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'op',
-    title: 'Farmer with pinpoint pupils, sweating and a slow pulse',
+    title: 'A 34-year-old farm worker, drowsy and drenched in sweat',
     category: 'Toxicology',
     difficulty: 'easy',
-    blurb: 'Brought in 40 minutes after drinking from an insecticide bottle. Wet, wheezing and barely conscious.',
+    blurb: 'Brought in after an argument at home, vomiting and struggling to breathe.',
     timeLimitSec: 600,
     budget: 1600,
     who: 'Mr. S., 34-year-old farmer. Found by his brother beside an empty 100 mL bottle of dichlorvos ("Nuvan") after an argument at home. Vomiting, drooling and incontinent of stool on the way in.',
@@ -346,10 +346,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'meningitis',
-    title: 'Fever, headache and a spreading rash in a university student',
+    title: 'Two days of fever and headache in a 24-year-old student',
     category: 'Infectious disease',
     difficulty: 'moderate',
-    blurb: 'Two days of headache and fever, now photophobic and confused, with a purpuric rash appearing on the legs.',
+    blurb: 'Photophobia and vomiting; her roommate says she is not making sense.',
     timeLimitSec: 600,
     budget: 2200,
     who: 'Ms. F., 24-year-old university student, no significant past medical history. Two days of severe generalised headache, fever and vomiting. This morning she was confused and a rash appeared on both shins.',

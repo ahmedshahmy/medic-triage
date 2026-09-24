@@ -18,10 +18,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'pe',
-    title: 'Sudden breathlessness and collapse eight days after knee surgery',
+    title: 'Sudden breathlessness and a blackout in a 62-year-old woman',
     category: 'Respiratory / Thrombosis',
     difficulty: 'moderate',
-    blurb: 'Day eight after a total knee replacement: sudden pleuritic pain, breathlessness and a faint in the bathroom.',
+    blurb: 'It began while she was walking to the bathroom, eight days after surgery.',
     timeLimitSec: 600,
     budget: 2600,
     who: 'Mrs. L., 62-year-old retired teacher. Total knee replacement eight days ago; mobility poor since, calf discomfort for two days. Sudden pleuritic right-sided chest pain while walking to the bathroom, then a collapse with brief loss of consciousness.',
@@ -125,10 +125,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'dengue',
-    title: 'Day five of fever, now with abdominal pain and bleeding gums',
+    title: 'A 28-year-old man whose fever has settled but who feels worse',
     category: 'Tropical medicine',
     difficulty: 'moderate',
-    blurb: 'The fever has broken, but the patient is worse: severe abdominal pain, vomiting, cold hands and bleeding gums.',
+    blurb: 'Five days of fever, now with severe abdominal pain and vomiting.',
     timeLimitSec: 600,
     budget: 1900,
     who: 'Mr. A., 28-year-old software engineer. Five days of high fever with severe body aches and headache. The fever settled this morning, but he now has severe abdominal pain, repeated vomiting and bleeding from the gums.',
@@ -231,10 +231,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'hyponatraemia',
-    title: 'Confusion and a seizure in a man on a thiazide',
+    title: 'Three days of confusion and unsteadiness in a 68-year-old man',
     category: 'Nephrology / Neurology',
     difficulty: 'hard',
-    blurb: 'Three days of confusion and unsteadiness, now a generalised seizure in the resuscitation room.',
+    blurb: 'He has just had a generalised seizure in the resuscitation room.',
     timeLimitSec: 600,
     budget: 2300,
     who: 'Mr. B., 68-year-old retired clerk. Three days of nausea, headache, confusion and unsteadiness on his feet. He has just had a generalised tonic-clonic seizure on arrival. He takes hydrochlorothiazide for hypertension and drinks three to four litres of water daily.',
@@ -338,10 +338,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'adrenal',
-    title: 'Known Addison disease, vomiting for four days and now barely responsive',
+    title: 'Four days of vomiting in a 42-year-old woman, now barely responsive',
     category: 'Endocrinology',
     difficulty: 'hard',
-    blurb: 'She stopped her hydrocortisone because she could not keep the tablets down. Now shocked, hyponatraemic and hypoglycaemic.',
+    blurb: 'She has taken nothing by mouth for two days and is grey and clammy.',
     timeLimitSec: 600,
     budget: 2000,
     who: 'Ms. P., 42-year-old teacher with known primary adrenal insufficiency (Addison disease) on hydrocortisone and fludrocortisone. Four days of a flu-like illness with vomiting and diarrhoea; she stopped her tablets because they would not stay down.',

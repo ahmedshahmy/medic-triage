@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'hse',
-    title: 'Fever, strange smells and a personality change',
+    title: 'Fever and odd behaviour in a 41-year-old man',
     category: 'Neurology / Infectious disease',
     difficulty: 'moderate',
-    blurb: 'Three days of fever and headache, now smelling burning rubber, behaving oddly and having focal seizures.',
+    blurb: 'Three days of headache and fever; his wife says he is not himself.',
     timeLimitSec: 600,
     budget: 2200,
     who: 'Mr. K., 41-year-old accountant. Three days of fever, severe headache and malaise. His wife says he has become irritable and has been speaking nonsense; yesterday he complained repeatedly of the smell of burning rubber that nobody else could detect, and this morning he had a seizure affecting the right arm.',
@@ -119,10 +119,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'stroke',
-    title: 'Sudden weakness and loss of speech ninety minutes ago',
+    title: 'Sudden weakness and loss of speech in a 71-year-old man',
     category: 'Neurology',
     difficulty: 'moderate',
-    blurb: 'Right arm and leg heavy, speech lost, in atrial fibrillation and not anticoagulated — still inside the window.',
+    blurb: 'It came on suddenly ninety minutes ago and has not improved since.',
     timeLimitSec: 600,
     budget: 2400,
     who: 'Mr. H., 71-year-old retired joiner with permanent atrial fibrillation, not anticoagulated because of a previous duodenal ulcer bleed. Ninety minutes ago he suddenly developed right-sided weakness and was unable to speak. His wife called an ambulance immediately and he arrives with a pre-alert.',
@@ -225,10 +225,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'serotonin',
-    title: 'Agitated, sweating and shaking after a new antidepressant and tramadol',
+    title: 'Agitation and sweating in a 28-year-old man',
     category: 'Toxicology',
     difficulty: 'hard',
-    blurb: 'Started sertraline two weeks ago, took tramadol for back pain yesterday; now febrile, clonic and rigid only in the legs.',
+    blurb: 'Twelve hours of shivering, sweating and muscle twitching.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Mr. F., 28-year-old warehouse worker. Started sertraline two weeks ago for depression and took tramadol for a back injury yesterday and again this morning. He has become progressively agitated, sweaty and shaky, and his girlfriend says his legs are "jumping on their own".',

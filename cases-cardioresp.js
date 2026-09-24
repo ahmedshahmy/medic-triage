@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'copd',
-    title: 'Drowsy COPD patient given 15 litres of oxygen by the ambulance crew',
+    title: 'Breathlessness and drowsiness in a 68-year-old man',
     category: 'Respiratory',
     difficulty: 'easy',
-    blurb: 'Four days of purulent sputum and worsening breathlessness, now barely rousable on high-flow oxygen.',
+    blurb: 'Four days of cough with green sputum; he is barely rousable on the ambulance oxygen.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Mr. G., 68-year-old retired carpenter with COPD (FEV1 40% predicted, 40 pack-years) and a known CO2 retainer — his last arterial gas showed a pCO2 of 7.5 kPa. Four days of worsening breathlessness with green purulent sputum; the ambulance crew applied 15 litres of oxygen through a reservoir mask.',
@@ -123,10 +123,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'apoedema',
-    title: 'Sitting bolt upright with pink frothy sputum',
+    title: 'Two days of breathlessness in a 72-year-old man',
     category: 'Cardiology',
     difficulty: 'moderate',
-    blurb: 'Two nights of orthopnoea, now drowning: saturations 86%, bibasal crackles and a blood pressure of 178/98.',
+    blurb: 'He cannot lie flat and is coughing up frothy sputum.',
     timeLimitSec: 600,
     budget: 1600,
     who: 'Mr. P., 72-year-old retired bus driver with ischaemic cardiomyopathy (previous inferior myocardial infarction, LVEF 30%) and permanent atrial fibrillation. Two days of worsening orthopnoea and ankle swelling, now unable to speak in sentences with pink frothy sputum.',
@@ -229,10 +229,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'tamponade',
-    title: 'Hypotensive, distended neck veins and a quiet heart after a viral illness',
+    title: 'Breathlessness and dizziness three weeks after a flu-like illness',
     category: 'Cardiology',
     difficulty: 'hard',
-    blurb: 'Three days of breathlessness and dizziness, now shocked with a pulse pressure of 24 mmHg and clear lungs.',
+    blurb: 'She collapsed while getting dressed and her blood pressure is 82/58.',
     timeLimitSec: 600,
     budget: 1800,
     who: 'Mrs. B., 62-year-old retired teacher. Three weeks ago she had a flu-like illness with pleuritic chest pain that settled. For three days she has been increasingly breathless and dizzy, and today she collapsed while getting dressed.',

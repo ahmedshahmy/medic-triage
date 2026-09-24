@@ -111,6 +111,25 @@ for (const c of CASES) {
   if (!c.tests.some((t) => t.flag === 'critical')) p('no investigation flagged critical');
   if (c.differentials.length < 6) p('differential list too short');
 
+  /* the title and blurb set the scene: they must not name the diagnosis.
+     Any significant word of the canonical label appearing there is a giveaway. */
+  // descriptors and symptoms belong in a title; the diagnosis itself does not
+  const GENERIC = new Set(['severe', 'acute', 'chronic', 'primary', 'secondary', 'managed', 'patient',
+    'shock', 'failure', 'injury', 'infection', 'syndrome', 'withdrawal', 'disturbance', 'related',
+    'phase', 'critical', 'system', 'blockade', 'induced', 'associated', 'involvement',
+    'seizure', 'convulsion', 'coma', 'collapse', 'confusion', 'drowsiness', 'weakness',
+    'breathlessness', 'vomiting', 'fever', 'headache', 'jaundice', 'lethargy', 'palpitations',
+    'sweating', 'agitation', 'diarrhoea', 'wheeze', 'rigors', 'thirst', 'bleeding', 'cough']);
+  const labelWords = new Set(c.dx.label.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ')
+    .split(/[\s-]+/).filter((w) => w.length >= 6 && !GENERIC.has(w)));
+  for (const [field, text] of [['title', c.title], ['blurb', c.blurb]]) {
+    const words = text.toLowerCase().split(/[^a-z0-9-]+/);
+    const hit = words.filter((w) => labelWords.has(w));
+    if (hit.length) p(`${field} names the diagnosis ("${hit.join(' ')}")`);
+  }
+  if (c.title.length > 80) p(`title is too long for a case list (${c.title.length} chars)`);
+  if (c.blurb.length > 120) p(`blurb is too long (${c.blurb.length} chars)`);
+
   /* every harmful management option should carry an explanation */
   for (const o of c.mgmt.options.filter((x) => x.harm)) {
     if (!o.msg || o.msg.length < 30) p(`harmful option ${o.id} has no teaching message`);

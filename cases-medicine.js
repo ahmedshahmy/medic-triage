@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'varices',
-    title: 'Vomiting large volumes of blood in known alcoholic cirrhosis',
+    title: 'Vomiting large volumes of blood in a 52-year-old man',
     category: 'Hepatology / Gastroenterology',
     difficulty: 'moderate',
-    blurb: 'Half a litre of fresh blood in the ambulance, jaundiced and hypotensive, with ascites and spider naevi.',
+    blurb: 'Two episodes of fresh red vomiting and black tarry stools.',
     timeLimitSec: 600,
     budget: 2200,
     who: 'Mr. D., 52-year-old man with alcohol-related cirrhosis diagnosed three years ago. Brought in after two episodes of large-volume haematemesis and melaena. He has been drinking heavily for the past month and has not attended clinic.',
@@ -127,10 +127,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'cap',
-    title: 'Four days of cough and fever, now confused and hypotensive',
+    title: 'Four days of cough and fever in a 66-year-old woman',
     category: 'Respiratory / Infectious disease',
     difficulty: 'moderate',
-    blurb: 'A diabetic smoker with rigors, pleuritic pain and new confusion — saturations 89% on air.',
+    blurb: 'She has become drowsy and confused since this morning.',
     timeLimitSec: 600,
     budget: 1600,
     who: 'Mrs. W., 66-year-old retired shopkeeper with type 2 diabetes and a 30 pack-year smoking history. Four days of productive cough with rust-coloured sputum, fever and right-sided pleuritic chest pain. Brought in after her daughter found her confused and drowsy this morning.',
@@ -236,10 +236,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'pancreatitis',
-    title: 'Epigastric pain boring through to the back after a drinking binge',
+    title: 'Severe upper abdominal pain in a 45-year-old man',
     category: 'Gastroenterology',
     difficulty: 'moderate',
-    blurb: 'Twelve hours of severe epigastric pain radiating to the back, repeated vomiting and a distended, silent abdomen.',
+    blurb: 'Twelve hours of pain that bores through to the back, with repeated vomiting.',
     timeLimitSec: 600,
     budget: 2000,
     who: 'Mr. M., 45-year-old builder, BMI 32, with a background of heavy weekend drinking and a recent episode of biliary colic. Twelve hours of severe constant epigastric pain radiating straight through to the back, with repeated vomiting and no relief from antacids.',

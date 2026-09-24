@@ -73,7 +73,8 @@ try {
       const rejectedDistractors = c.differentials.length - accepted.length;
       out.push({ id: c.id, labelOk, accepted, rejectedDistractors,
         total: c.differentials.length,
-        typo: window.DocSim.matchFor(c.dx, c.dx.accept[0].replace(/tion/, 'shun')).ok,
+        titleLeak: window.DocSim.matchFor(c.dx, c.title).ok,
+        blurbLeak: window.DocSim.matchFor(c.dx, c.blurb).ok,
         nonsense: window.DocSim.matchFor(c.dx, 'a bad case of the vapours').ok });
     }
     return JSON.stringify(out); })()`);
@@ -85,6 +86,10 @@ try {
   const thinList = mrows.filter((r) => r.rejectedDistractors < 5).map((r) => r.id);
   check('each case offers at least 5 real distractors', thinList.length === 0, thinList.join(', '));
   check('a nonsense answer never matches', mrows.every((r) => r.nonsense === false));
+  const titleLeaks = mrows.filter((r) => r.titleLeak).map((r) => r.id);
+  check('no case title gives the diagnosis away', titleLeaks.length === 0, titleLeaks.join(', '));
+  const blurbLeaks = mrows.filter((r) => r.blurbLeak).map((r) => r.id);
+  check('no case blurb gives the diagnosis away', blurbLeaks.length === 0, blurbLeaks.join(', '));
   console.log('    accepted differentials: ' + mrows.map((r) => r.id + '=' + r.accepted.length).join(' '));
 
   /* --------------------- 2. home screen renders --------------------- */
@@ -93,6 +98,8 @@ try {
     active: document.querySelector('.screen.is-active')?.id,
     cases: document.querySelectorAll('#case-list .case-item').length,
     stats: document.querySelectorAll('#career-stats .stat').length,
+    specialtyPills: document.querySelectorAll('#case-list .pill-cat').length,
+    listText: document.querySelector('#case-list').textContent.replace(/\s+/g, ' '),
     title: document.title,
     heading: document.querySelector('.logo h1').textContent.trim(),
     byline: document.querySelector('.byline').textContent.replace(/\\s+/g, ' ').trim(),
@@ -109,6 +116,7 @@ try {
   check('start screen is active', h.active === 'screen-start', h.active);
   check('all cases listed', h.cases === EXPECTED_CASES, 'got ' + h.cases);
   check('career panel rendered', h.stats === 4, 'got ' + h.stats);
+  check('the case list withholds the specialty', h.specialtyPills === 0, 'got ' + h.specialtyPills);
   check('the app is titled DocSim', h.title.startsWith('DocSim') && h.heading === 'DocSim',
     `${h.title} / ${h.heading}`);
   check('the author credit sits next to the title',
@@ -156,6 +164,9 @@ try {
   const started = await cdp.eval(`!document.querySelector('#gate').hidden === false &&
     DocSim.state && DocSim.state.running`);
   check('clock is running after Begin', started === true);
+  const hudPill = await cdp.eval(`document.querySelector('#hud-cat').textContent.trim()`);
+  check('the HUD labels the case neutrally, not by specialty',
+    /^Case \d+ of \d+$/.test(hudPill), hudPill);
 
   /* ------------------- 4. resuscitation + lab queue ----------------- */
   console.log('\n4. Resuscitation, investigations and the lab queue');
@@ -280,6 +291,7 @@ try {
     rank: document.querySelector('#rank-line').textContent,
     rows: document.querySelectorAll('#score-breakdown .brow').length,
     debrief: document.querySelectorAll('#debrief .pearl').length,
+    debriefText: document.querySelector('#debrief').textContent.replace(/\s+/g, ' '),
     share: document.querySelector('#share-text').value,
     card: document.querySelector('#scorecard').toDataURL().length })`);
   const en = JSON.parse(end);
@@ -289,6 +301,8 @@ try {
   check('grade line present', /Grade:/.test(en.rank), en.rank);
   check('score breakdown itemised', en.rows >= 8, 'rows ' + en.rows);
   check('debrief populated', en.debrief >= 8, 'pearls ' + en.debrief);
+  check('the specialty is revealed after the case is closed',
+    /Specialty: Cardiology/.test(en.debriefText), en.debriefText.slice(0, 60));
   check('share text carries the app name, the score and the author credit',
     /DocSim/.test(en.share) && /1520/.test(en.share) && /Ahamed Shahmy/.test(en.share),
     en.share.slice(0, 90));

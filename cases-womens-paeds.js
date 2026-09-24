@@ -20,7 +20,7 @@ window.CASES = window.CASES || [];
     title: 'Heavy bleeding twenty minutes after a normal delivery',
     category: 'Obstetrics',
     difficulty: 'moderate',
-    blurb: 'A boggy uterus, an estimated 1200 mL lost, and a pulse of 132 with a blood pressure of 88/54.',
+    blurb: 'The placenta delivered complete, but the bleeding has continued.',
     timeLimitSec: 600,
     budget: 1300,
     who: 'Ms. M., 31-year-old primigravida who delivered a healthy 3.4 kg boy by spontaneous vaginal delivery twenty minutes ago after an uncomplicated labour. The placenta delivered complete, but she has continued to bleed heavily and the estimated loss is now 1200 mL.',
@@ -118,10 +118,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'intussusception',
-    title: 'A nine-month-old with screaming episodes and redcurrant-jelly stool',
+    title: 'A nine-month-old who will not stop screaming',
     category: 'Paediatrics',
     difficulty: 'moderate',
-    blurb: 'Twelve hours of intermittent inconsolable crying with leg drawing-up, now lethargic with a sausage-shaped mass.',
+    blurb: 'Twelve hours of episodic crying with vomiting, now lethargic.',
     timeLimitSec: 600,
     budget: 1100,
     who: 'Baby O., a nine-month-old boy brought in by his mother. Twelve hours ago he began having episodes of inconsolable screaming every twenty minutes, drawing his legs up to his abdomen, and he has vomited several times. He has become increasingly lethargic, and his mother noticed a dark red, jelly-like stool in his nappy an hour ago.',

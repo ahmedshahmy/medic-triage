@@ -18,10 +18,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'asthma',
-    title: 'Young asthmatic who can no longer finish a sentence',
+    title: 'A 24-year-old woman who can no longer finish a sentence',
     category: 'Respiratory',
     difficulty: 'easy',
-    blurb: 'Three days of a cold, twelve puffs of salbutamol in an hour, and now a silent chest.',
+    blurb: 'Three days of a cold, and twelve puffs of her inhaler in the last hour.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Ms. N., 24-year-old student. Asthmatic since childhood, usually well controlled on a preventer inhaler. Three days of a viral cold with worsening wheeze and cough. She has used her salbutamol inhaler roughly twelve times in the last hour with no relief.',
@@ -122,10 +122,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'opioid',
-    title: 'Unresponsive young man in a park with pinpoint pupils',
+    title: 'An unresponsive 24-year-old man found on a park bench',
     category: 'Toxicology',
     difficulty: 'easy',
-    blurb: 'Found slumped on a bench, breathing four times a minute, with a syringe on the ground beside him.',
+    blurb: 'Breathing four times a minute, with a syringe on the ground beside him.',
     timeLimitSec: 600,
     budget: 1400,
     who: 'Mr. J., 24-year-old man brought in by ambulance after a passer-by called for help. Found unresponsive on a park bench with a used syringe nearby and a tourniquet mark on his left forearm. No identification, no known history.',
@@ -228,10 +228,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'status',
-    title: 'Seizure that will not stop after two days of diarrhoea',
+    title: 'A convulsion that has lasted twelve minutes in a 34-year-old man',
     category: 'Neurology',
     difficulty: 'moderate',
-    blurb: 'Known epilepsy, ran out of tablets during a stomach bug, and has been fitting since the ambulance arrived.',
+    blurb: 'Two days of vomiting and diarrhoea, and no tablets since yesterday.',
     timeLimitSec: 600,
     budget: 2000,
     who: 'Mr. K., 34-year-old warehouse worker with epilepsy since childhood, controlled on phenytoin. Two days of vomiting and diarrhoea; he has not kept his tablets down since yesterday. Continuous generalised tonic-clonic seizure for about 12 minutes, and 10 mg of buccal midazolam from the paramedics has had no effect.',
@@ -333,10 +333,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   add({
     id: 'ectopic',
-    title: 'Collapse with severe pelvic pain in a woman with seven weeks of amenorrhoea',
+    title: 'Sudden severe lower abdominal pain in a 26-year-old woman',
     category: 'Obstetrics & Gynaecology',
     difficulty: 'moderate',
-    blurb: 'Sudden severe left iliac fossa pain, a faint on the way to the toilet, and a shoulder-tip ache.',
+    blurb: 'She fainted on the way to the toilet and has a shoulder-tip ache.',
     timeLimitSec: 600,
     budget: 1800,
     who: 'Ms. S., 26-year-old woman, no significant past medical history, brought in by her partner. Seven weeks of amenorrhoea with a positive home pregnancy test. Sudden severe left iliac fossa pain an hour ago, followed by a collapse and a brief loss of consciousness. She has had light vaginal spotting for two days.',

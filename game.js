@@ -148,7 +148,6 @@
         <h3>${esc(c.title)}</h3>
         <span class="go">Play &rsaquo;</span>
         <span class="meta">
-          <span class="pill pill-cat">${esc(c.category)}</span>
           <span class="pill pill-diff ${c.difficulty}">${esc(c.difficulty)}</span>
           <span>${mmss(c.timeLimitSec)}</span><span>${money(c.budget)}</span>${best}
         </span>
@@ -218,7 +217,9 @@
     rxSelected = {};
 
     // header / static content
-    $('#hud-cat').textContent = cs.category;
+    // the specialty is withheld until the case is closed, so the diagnosis has to be discovered
+    const caseNo = window.CASES.findIndex((c) => c.id === cs.id) + 1;
+    $('#hud-cat').textContent = `Case ${caseNo} of ${window.CASES.length}`;
     const d = $('#hud-diff');
     d.textContent = cs.difficulty;
     d.className = 'pill pill-diff ' + cs.difficulty;
@@ -265,8 +266,7 @@
     if (gate) {
       gate.hidden = false;
       $('#gate-title').textContent = cs.title;
-      $('#gate-meta').innerHTML = `<span class="pill pill-cat">${esc(cs.category)}</span>
-        <span class="pill pill-diff ${cs.difficulty}">${esc(cs.difficulty)}</span>
+      $('#gate-meta').innerHTML = `<span class="pill pill-diff ${cs.difficulty}">${esc(cs.difficulty)}</span>
         <span>${mmss(cs.timeLimitSec)} on the clock</span><span>${money(cs.budget)} budget</span>`;
     }
     if (timer) clearInterval(timer);
@@ -1004,7 +1004,8 @@
       <h3>Pitfalls</h3>
       ${cs.debrief.pitfalls.map((k) => `<div class="pearl bad">${esc(k)}</div>`).join('')}
       <h3>Your numbers</h3>
-      <div class="pearl">Time used ${mmss(S.elapsed)} of ${mmss(cs.timeLimitSec)} &middot;
+      <div class="pearl"><b>Specialty:</b> ${esc(cs.category)} &middot;
+        time used ${mmss(S.elapsed)} of ${mmss(cs.timeLimitSec)} &middot;
         spent ${money(S.spent)} of ${money(cs.budget)} &middot; ${sc.ordered} investigations &middot;
         ${S.dxTries} diagnosis attempt(s) &middot; stability ${pct(S.stability)}</div>`;
 

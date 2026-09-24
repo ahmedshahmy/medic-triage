@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'endocarditis',
-    title: 'Three weeks of fever and night sweats with a new heart murmur',
+    title: 'Three weeks of fever and weight loss in a 38-year-old man',
     category: 'Infectious disease / Cardiology',
     difficulty: 'moderate',
-    blurb: 'Weight loss, drenching night sweats and a new pansystolic murmur in a man who injects heroin.',
+    blurb: 'Drenching night sweats and increasing breathlessness on exertion.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Mr. N., 38-year-old man who injects heroin. Three weeks of fever, drenching night sweats, malaise and 6 kg of weight loss. He has been treated twice with oral antibiotics for "flu" without improvement, and today he is more breathless with a racing heart.',
@@ -122,10 +122,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'febrileneutropenia',
-    title: 'Twelve days after chemotherapy, fever with no obvious source',
+    title: 'Fever and rigors in a 54-year-old woman',
     category: 'Oncology / Infectious disease',
     difficulty: 'moderate',
-    blurb: 'Day ten of the cycle, temperature 38.6 °C, mouth ulcers and a neutrophil count of 0.3.',
+    blurb: 'Two hours of fever with rigors and painful mouth ulcers.',
     timeLimitSec: 600,
     budget: 1400,
     who: 'Ms. T., 54-year-old teacher with breast cancer, day 10 after her third cycle of adjuvant chemotherapy (FEC), which included a pegfilgrastim injection. She has had a temperature at home for two hours with rigors, sore mouth ulcers and increasing lethargy. Her neutrophil count yesterday was 0.8 and her central line was inserted two months ago.',
@@ -226,10 +226,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'malaria',
-    title: 'Fever and drowsiness six days after returning from Nigeria',
+    title: 'Fever and drowsiness in a 29-year-old man',
     category: 'Tropical medicine',
     difficulty: 'moderate',
-    blurb: 'Four days of rigors, now jaundiced and confused with a temperature of 39.4 °C and no prophylaxis taken.',
+    blurb: 'Four days of rigors, now drowsy and jaundiced.',
     timeLimitSec: 600,
     budget: 1300,
     who: 'Mr. S., 29-year-old man who returned six days ago from a three-week visit to family in Nigeria. He took no antimalarial prophylaxis. Four days of fever with rigors, headache and vomiting; he has become drowsy and confused since this morning, and his wife says his eyes are yellow.',

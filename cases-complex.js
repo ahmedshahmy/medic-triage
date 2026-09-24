@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'digoxin',
-    title: 'Confused elderly woman with a pulse of 38 and yellow vision',
+    title: 'Confusion and vomiting in a 78-year-old woman',
     category: 'Toxicology / Cardiology',
     difficulty: 'hard',
-    blurb: 'Started amiodarone last week, been vomiting for three days, and now sees yellow halos around the lights.',
+    blurb: 'Three days of vomiting and a slow, irregular pulse.',
     timeLimitSec: 600,
     budget: 2000,
     who: 'Mrs. H., 78-year-old woman with atrial fibrillation on digoxin for eight years. Amiodarone was started last week for rhythm control, and she has had three days of vomiting and diarrhoea with poor oral intake. She is now confused and complains of yellow-green halos around lights.',
@@ -125,10 +125,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'thyroidstorm',
-    title: 'Fever of 40.6 C and a racing irregular pulse in known Graves disease',
+    title: 'Fever and agitation in a 34-year-old woman with a racing pulse',
     category: 'Endocrinology',
     difficulty: 'hard',
-    blurb: 'Stopped her carbimazole three weeks ago; now agitated, delirious, vomiting and in fast atrial fibrillation.',
+    blurb: 'Four days of a sore throat, and now confusion and vomiting.',
     timeLimitSec: 600,
     budget: 1500,
     who: 'Ms. R., 34-year-old teacher with Graves disease diagnosed two years ago. She stopped her carbimazole three weeks ago because she felt well. Four days of sore throat and dysuria, and since this morning she has been agitated, confused and vomiting with a fever of 40.6 C.',
@@ -238,10 +238,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'hyperkalaemia',
-    title: 'Weak, palpitations and a pulse of 48 in a patient on ramipril and spironolactone',
+    title: 'Weakness and palpitations in a 68-year-old man',
     category: 'Nephrology',
     difficulty: 'hard',
-    blurb: 'Three days of vomiting on top of ACE inhibition, spironolactone and NSAIDs — and the ECG is already changing.',
+    blurb: 'Three days of vomiting and diarrhoea, and a pulse of 48.',
     timeLimitSec: 600,
     budget: 950,
     who: 'Mr. T., 68-year-old man with heart failure on ramipril, spironolactone and bisoprolol. Three days of vomiting and diarrhoea with reduced oral intake, and he has been taking ibuprofen for back pain. Now he feels weak, light-headed and aware of his heart beating slowly.',

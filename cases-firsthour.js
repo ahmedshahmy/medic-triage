@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'anaphylaxis',
-    title: 'Wasp sting at a picnic, now wheezing with a pulse of 138',
+    title: 'Sudden wheeze and rash at a picnic',
     category: 'Emergency medicine',
     difficulty: 'easy',
-    blurb: 'Ten minutes after a sting: generalised hives, a tight chest, a swollen tongue and a falling blood pressure.',
+    blurb: 'Itching of the palms, a tight chest and a feeling of impending doom.',
     timeLimitSec: 600,
     budget: 1400,
     who: 'Ms. J., 27-year-old graphic designer with hay fever and no other history. Stung on the forearm by a wasp at a picnic ten minutes ago. Within two minutes she developed itching of the palms and soles, generalised hives, a tight chest and a sensation that "something terrible is about to happen".',
@@ -121,10 +121,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'tensionpneumo',
-    title: 'Fall from a ladder, now hypoxic with distended neck veins',
+    title: 'A fall from a ladder in a 42-year-old roofer',
     category: 'Respiratory / Emergency',
     difficulty: 'easy',
-    blurb: 'Four rib fractures on the right, saturations 84%, trachea deviated, and no breath sounds on that side.',
+    blurb: 'Severe breathlessness and chest pain twenty minutes after the fall.',
     timeLimitSec: 600,
     budget: 1400,
     who: 'Mr. V., 42-year-old roofer who fell three metres from a ladder thirty minutes ago onto his right side. He is in severe respiratory distress, and the paramedics report that his saturations have fallen from 96% to 84% during the journey.',
@@ -223,10 +223,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'hypoglycaemia',
-    title: 'Confused elderly diabetic who missed lunch',
+    title: 'A 74-year-old woman found drowsy by her carer',
     category: 'Endocrinology',
     difficulty: 'easy',
-    blurb: 'Found drowsy and disoriented by her carer; the capillary glucose reads 1.9 mmol/L.',
+    blurb: 'She has been off her food for two days and skipped lunch.',
     timeLimitSec: 600,
     budget: 1400,
     who: 'Mrs. D., 74-year-old retired seamstress with type 2 diabetes on gliclazide and metformin. Her carer found her drowsy, sweating and disoriented this afternoon; she had skipped lunch after a hospital appointment ran late.',
@@ -328,10 +328,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'torsion',
-    title: 'Teenager woken by sudden severe testicular pain',
+    title: 'A 16-year-old woken by sudden scrotal pain',
     category: 'Urology',
     difficulty: 'easy',
-    blurb: 'Three hours of left testicular pain with vomiting; the testis sits high and horizontal.',
+    blurb: 'Three hours of pain with vomiting; the left side is swollen and tender.',
     timeLimitSec: 600,
     budget: 1000,
     who: 'Mr. A., 16-year-old student, woken from sleep three hours ago by sudden severe left testicular pain, followed by vomiting. There is no history of trauma, no urinary symptoms and no previous similar episode.',

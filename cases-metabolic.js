@@ -17,10 +17,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'myxoedema',
-    title: 'Found unconscious in an unheated flat, with a temperature of 33.5 C',
+    title: 'An unconscious 76-year-old woman found at home',
     category: 'Endocrinology',
     difficulty: 'hard',
-    blurb: 'Known hypothyroid, off her tablets for three weeks; now hypothermic, bradycardic and barely breathing.',
+    blurb: 'She is cold to the touch, barely breathing and unrousable.',
     timeLimitSec: 600,
     budget: 1800,
     who: 'Mrs. C., 76-year-old widow with hypothyroidism on levothyroxine. Her prescription ran out three weeks ago and she has not replaced it. A neighbour found her unconscious on the floor of her unheated flat this morning; the ambulance crew record a temperature of 33.5 C that their thermometer would not read below.',
@@ -125,10 +125,10 @@ window.CASES = window.CASES || [];
      ======================================================================= */
   window.CASES.push({
     id: 'hypercalcaemia',
-    title: 'Confused, constipated and profoundly weak in metastatic lung cancer',
+    title: 'Confusion and weakness in a 66-year-old man',
     category: 'Endocrinology / Oncology',
     difficulty: 'hard',
-    blurb: 'Five days of confusion, vomiting and polyuria, now dehydrated with a corrected calcium of 4.1 mmol/L.',
+    blurb: 'Five days of vomiting, constipation and passing large volumes of urine.',
     timeLimitSec: 600,
     budget: 1800,
     who: 'Mr. L., 66-year-old retired teacher with metastatic squamous cell carcinoma of the lung diagnosed four months ago, currently between chemotherapy cycles. Five days of increasing confusion, constipation, nausea and vomiting, with passing large volumes of urine. He is now profoundly weak and drowsy.',
