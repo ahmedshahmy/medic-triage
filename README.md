@@ -152,7 +152,7 @@ add({
   difficulty: 'moderate',             // easy | moderate | hard
   blurb: 'Short line shown above the monitor.',
   timeLimitSec: 600,
-  budget: 2200,                       // in $CUR units
+  budget: 2200,                       // in pounds
   who: 'Demographics and background.',
   history: ['bullet', 'bullet', 'bullet'],
   exam: ['bullet', 'bullet', 'bullet'],

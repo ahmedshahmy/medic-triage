@@ -13,8 +13,8 @@
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const fmt = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
-  const $CUR = '$';
-  const money = (n) => $CUR + Math.round(n).toLocaleString('en-US');
+  const CUR = '£';
+  const money = (n) => CUR + Math.round(n).toLocaleString('en-US');
   const mmss = (sec) => {
     sec = Math.max(0, Math.ceil(sec));
     const m = Math.floor(sec / 60), s = sec % 60;

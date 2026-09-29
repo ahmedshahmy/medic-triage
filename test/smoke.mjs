@@ -149,7 +149,7 @@ try {
   check('play screen active', p.active === 'screen-play', p.active);
   check('pre-start gate shown (clock not running yet)', p.gate === true);
   check('clock shows 10:00', p.time === '10:00', p.time);
-  check('budget shows the case budget', p.money === '$1,500', p.money);
+  check('budget shows the case budget', p.money === '£1,500', p.money);
   check('stability 100%', p.life === '100%', p.life);
   check('actions rendered (10)', p.actions === 10, 'got ' + p.actions);
   check('tests rendered (13)', p.tests === 13, 'got ' + p.tests);
